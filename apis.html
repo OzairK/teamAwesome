@@ -23,6 +23,8 @@
                 <!-- <i class="material-icons right">send</i> -->
             </button>  
         </form>
+        <div><span id="cuisines-list"></span></div>
+        <div><span id="restaurants-list"></span></div>
     </div>
 
 
@@ -48,7 +50,9 @@ $("#submit").on("click", function (event){
     cuisine=capUpper($("#cuisine").val().trim());
     console.log(city, cuisine);
     getCityInfo(function(){
-        getCuisineInfo();
+        getCuisineInfo(function(){
+            getRestuarants();
+        });
     });
 });
 
@@ -78,9 +82,11 @@ function getCityInfo(callback){
 
 var queryUrlCuisines;
 var cuisine_id;
-var allCuisines=[]; //list of all cuisines
+var cuisine_name;
+var allCuisines=[{}]; //list of all cuisines and ids in obj
+// var allCuisines=[]; //list all cuisines in array
 //gives list of cuisine types for a city
-function getCuisineInfo(){
+function getCuisineInfo(callback){
     queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
     $.ajax({
         url:queryUrlCuisines,
@@ -88,31 +94,41 @@ function getCuisineInfo(){
         headers: {"user-key": apiKey}
     }).then(function(response) {
         for (var i=0; i<response.cuisines.length; i++){
-            allCuisines.push(response.cuisines[i].cuisine.cuisine_name);
+            allCuisines[i] = {"name":response.cuisines[i].cuisine.cuisine_name,
+            "id":response.cuisines[i].cuisine.cuisine_id};
+            // allCuisines.push(response.cuisines[i].cuisine.cuisine_name);
             if (response.cuisines[i].cuisine.cuisine_name === cuisine){
+                cuisine_name= response.cuisines[i].cuisine.cuisine_name;
                 cuisine_id = response.cuisines[i].cuisine.cuisine_id;
-                console.log(response.cuisines[i].cuisine.cuisine_id);
+                console.log(response.cuisines[i].cuisine.cuisine_id); //cajun=491 //working
             };        
         };
-        console.log(allCuisines.join(", "));
+        // console.log(allCuisines.join(", ")); //when using array
+        console.log(allCuisines); //object of names and ids
+        $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
+        for (var j=0; j<allCuisines.length; j++){
+            $("#cuisines-list").append(allCuisines[j].name + " - ");
+        };
+        callback();
+        return cuisine_name;//not working
     });
 };
 
-// var queryURLVegRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=277&entity_type=city&cuisines=308";
-
-//list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
-    // $.ajax({
-    //     url:queryURLVegRestaurants,
-    //     method:"GET",
-    //     headers: {"user-key": '134929701576f37675a021f1de544eed'} //api key
-    // }).then(function(response) {
-    //     console.log(response.restaurants);
-    //     for (var i=0; i<response.restaurants.length; i++){
-    //         console.log("id: "+response.cuisines[i].cuisine.cuisine_id);//vegetarian is 308
-    //         console.log("id): "+response.cuisines[i].cuisine.cuisine_name);
-    //     };
-    // });
-
+// list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
+function getRestuarants(){
+var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
+    $.ajax({
+        url:queryUrlRestaurants,
+        method:"GET",
+        headers: {"user-key": apiKey} //api key
+    }).then(function(response) {
+        console.log(response.restaurants); //lists 20 restaurants
+        $("#restaurants-list").append("<br><br><strong>List of all restaurants for " + cuisine_name + " in " + city_name + " : </strong><br>");
+        for (var j=0; j<response.restaurants.length; j++){
+            $("#restaurants-list").append(response.restaurants[j].restaurant.name + " - ");
+        }; 
+    });
+};
 
     // $("#form")[0].reset();
 
