@@ -11,11 +11,11 @@
         <form class="col s12">
             <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="city" type="text" >
+                <input placeholder="Houston" id="city" type="text" >
                 <label for="city">City</label>
             </div>
             <div class="input-field col s6">
-                <input id="cuisine" type="text" >
+                <input placeholder="Tex-Mex" id="cuisine" type="text" >
                 <label for="cuisine">Type of cuisine</label>
             </div>
             </div>
@@ -35,38 +35,32 @@
 //get location coordinates
 
 //from form get:
-//city
-//query to get city code
-//type of cuisine - provide dropdown
-//query to get cuisine code
+    //city -->query to get city code
+    //type of cuisine (provide dropdown) -->query to get cuisine code
 
 //after showing restuarants on map, click on one (input code) to get daily menu, restaurant info, and reviews
 //place to search a restaurant to also do this
-var city;
-var cuisine;
+var city; //from user
+var cuisine; //from user
 $("#submit").on("click", function (event){
     event.preventDefault();
-    city=$("#city").val().trim();
-    cuisine=$("#cuisine").val().trim();
+    city=capUpper($("#city").val().trim());
+    cuisine=capUpper($("#cuisine").val().trim());
     console.log(city, cuisine);
-    getCityInfo();
-    getCuisineInfo();
+    getCityInfo(function(){
+        getCuisineInfo();
+    });
 });
 
-    var apiKey="134929701576f37675a021f1de544eed";
+var apiKey="134929701576f37675a021f1de544eed";
 
-    var queryUrlLocation;
-    var city_id;
-    var city_name;
-    var entity_type;
-
-    var queryUrlCuisines;
-
-    // var queryURLVegRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=277&entity_type=city&cuisines=308";
-
+var queryUrlLocation;
+var city_id;
+var city_name;
+var entity_type;
 //gives location info for use in other queries; also gives suggestd city name from a search word (use this function for search??)
 //gives location information for inputed city, Ex: name, city_id, city_type
-function getCityInfo(){
+function getCityInfo(callback){
     queryUrlLocation="https://developers.zomato.com/api/v2.1/locations?query="+city; 
     $.ajax({
         url:queryUrlLocation,
@@ -78,9 +72,13 @@ function getCityInfo(){
         city_name=response.location_suggestions[0].city_name;
         entity_type=response.location_suggestions[0].entity_type;
         console.log(city_id, city_name, entity_type);
+        callback();
     });
 };
 
+var queryUrlCuisines;
+var cuisine_id;
+var allCuisines=[]; //list of all cuisines
 //gives list of cuisine types for a city
 function getCuisineInfo(){
     queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
@@ -89,15 +87,18 @@ function getCuisineInfo(){
         method:"GET",
         headers: {"user-key": apiKey}
     }).then(function(response) {
-        console.log(queryUrlCuisines);
-        console.log(response.cuisines);
         for (var i=0; i<response.cuisines.length; i++){
-            console.log("id: "+response.cuisines[i].cuisine.cuisine_id);//vegetarian is 308
-            console.log("name: "+response.cuisines[i].cuisine.cuisine_name);
+            allCuisines.push(response.cuisines[i].cuisine.cuisine_name);
+            if (response.cuisines[i].cuisine.cuisine_name === cuisine){
+                cuisine_id = response.cuisines[i].cuisine.cuisine_id;
+                console.log(response.cuisines[i].cuisine.cuisine_id);
+            };        
         };
+        console.log(allCuisines.join(", "));
     });
 };
 
+// var queryURLVegRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=277&entity_type=city&cuisines=308";
 
 //list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
     // $.ajax({
@@ -108,13 +109,16 @@ function getCuisineInfo(){
     //     console.log(response.restaurants);
     //     for (var i=0; i<response.restaurants.length; i++){
     //         console.log("id: "+response.cuisines[i].cuisine.cuisine_id);//vegetarian is 308
-    //         console.log("name: "+response.cuisines[i].cuisine.cuisine_name);
+    //         console.log("id): "+response.cuisines[i].cuisine.cuisine_name);
     //     };
     // });
 
 
     // $("#form")[0].reset();
 
+function capUpper(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 </script>
 </body>
