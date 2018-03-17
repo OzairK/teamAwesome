@@ -61,16 +61,14 @@ function getCuisineInfo(callback){
             var r=response.cuisines[i].cuisine;
             allCuisines[i] = {"name":r.cuisine_name,
             "id":r.cuisine_id};
-            // allCuisines.push(r.cuisine_name);
+            allCuisines.push(r.cuisine_name);
             if (r.cuisine_name === cuisine){
                 cuisine_name= r.cuisine_name;
-                // cuisine_name= r.cuisine_name;
                 cuisine_id = r.cuisine_id;
-                // console.log(cuisine_name);
                 console.log(r.cuisine_id); //cajun=491 //working
             };        
         };
-        // console.log(allCuisines.join(", ")); //when using array
+        console.log(allCuisines.join(", ")); //when using array
         console.log(allCuisines); //object of names and ids
         $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
         for (var j=0; j<allCuisines.length; j++){
@@ -96,6 +94,7 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
             var r=response.restaurants[j].restaurant;
             var rl=r.location;
             var ru=r.user_rating;
+            //allRestaurants.location.latittude
             allRestaurants[j]={
                 "name":r.name,
                 "id":r.id,
@@ -125,6 +124,7 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
 function capUpper(string){
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
 
 
 function initMap() {
