@@ -1,40 +1,201 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
     <title>My Veggie Map</title>
     <meta charset="UTF-8">
     <meta name="viewpot" content="width=device-width, initial-scale=1.0">
+
+    <!-- Materialize -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
     <link rel="stylesheet" href="assets/css/reset.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Materialize -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
 </head>
+
 <body>
+
+
+
+    <!-- Top of page -->
     <div class="container">
 
 
-        
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">My Veggie Eats</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a href="sass.html">aa</a>
+                    </li>
+                    <li>
+                        <button data-target="modal1" class="btn modal-trigger waves-effect waves-light btn modal-trigger">Login</button>
+                    </li>
 
+                    <div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                                            <label for="first_name">First Name</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id="last_name" type="text" class="validate">
+                                            <label for="last_name">Last Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+                                            <label for="disabled">Disabled</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="password" type="password" class="validate">
+                                            <label for="password">Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="email" type="email" class="validate">
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            This is an inline input field:
+                                            <div class="input-field inline">
+                                                <input id="email" type="email" class="validate">
+                                                <label for="email" data-error="wrong" data-success="right">Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Disagree</a>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                        </div>
+                    </div>
+
+                    <li>
+                        <a href="collapsible.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <!-- Search boxes -->
+        <div class="row">
+            <div class="col s12 m4 l4">
+                <p>search by cuisine</p>
+            </div>
+            <div class="col s12 m4 l4">
+                <p>search by name</p>
+            </div>
+            <div class="col s12 m4 l4">
+                <p>search by location</p>
+            </div>
+        </div>
 
     </div>
+    <!-- End of top -->
+
+
+    <!-- Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Left column:  Google Map/tabs -->
+            <div id="googleAPI" class="col s12 m6 l8">
+                <div class="row">tabs</div>
+                <div class="row">
+                    <div id="map"></div>
+                    !</div>
+            </div>
+
+            <!-- Right column:  Zomato restaurants/reviews/notes -->
+            <div id="zomatoAPI" class="col s12 m6 l4">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Houston" id="city" type="text">
+                                <label for="city">City</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Tex-Mex" id="cuisine" type="text">
+                                <label for="cuisine">Type of cuisine</label>
+                            </div>
+                        </div>
+                        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <!-- <i class="material-icons right">send</i> -->
+                        </button>
+                    </form>
+                    <div>
+                        <span id="cuisines-list"></span>
+                    </div>
+                    <div>
+                        <span id="restaurants-list"></span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- End of content -->
+
+
 
 
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
+
     <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAn3KaitMECF3eoP-jwVBPKxM2u1_MOWQM",
-        authDomain: "teamawesome-c4e37.firebaseapp.com",
-        databaseURL: "https://teamawesome-c4e37.firebaseio.com",
-        projectId: "teamawesome-c4e37",
-        storageBucket: "teamawesome-c4e37.appspot.com",
-        messagingSenderId: "426168129967"
-      };
-      firebase.initializeApp(config);
+        var config = {
+            // ...
+        };
+        firebase.initializeApp(config);
     </script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script> <!-- jquery -->
-<script src="assets/javascript/materialize.min.js"></script><!-- materialize -->
-<script src="assets/javascript/logic.js"></script><!-- our js -->
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAn3KaitMECF3eoP-jwVBPKxM2u1_MOWQM",
+            authDomain: "teamawesome-c4e37.firebaseapp.com",
+            databaseURL: "https://teamawesome-c4e37.firebaseio.com",
+            projectId: "teamawesome-c4e37",
+            storageBucket: "teamawesome-c4e37.appspot.com",
+            messagingSenderId: "426168129967"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="assets/javascript/materialize.min.js"></script>
+    <script src="assets/javascript/logic.js"></script>
+    <!-- our js -->
 </body>
+
 </html>
