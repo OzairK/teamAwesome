@@ -137,9 +137,20 @@
     <!-- End of content -->
     
 
-
-
+<!-- Link to firebase data -->
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAn3KaitMECF3eoP-jwVBPKxM2u1_MOWQM",
+        authDomain: "teamawesome-c4e37.firebaseapp.com",
+        databaseURL: "https://teamawesome-c4e37.firebaseio.com",
+        projectId: "teamawesome-c4e37",
+        storageBucket: "teamawesome-c4e37.appspot.com",
+        messagingSenderId: "426168129967"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
@@ -149,12 +160,6 @@
     <!-- Leave out Storage -->
     <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
 
-    <script>
-        var config = {
-            // ...
-        };
-        firebase.initializeApp(config);
-    </script>
 
   
 <script src="https://code.jquery.com/jquery-3.3.1.js"
