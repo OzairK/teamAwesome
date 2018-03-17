@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
     <title>My Veggie Map</title>
     <meta charset="UTF-8">
@@ -16,11 +17,11 @@
     <!-- Materialize -->
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
- 
+
 </head>
+
 <body>
 
-  
 
     <!-- Top of page -->
     <div class="container">
@@ -53,6 +54,7 @@
     <div class="container">
 
         <div class="row">
+
 
             <!-- Left column:  Google Map/tabs -->
             <div id="googleAPI" class="col s12 m6 l8">
@@ -92,22 +94,28 @@
 
 
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
+
     <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAn3KaitMECF3eoP-jwVBPKxM2u1_MOWQM",
-        authDomain: "teamawesome-c4e37.firebaseapp.com",
-        databaseURL: "https://teamawesome-c4e37.firebaseio.com",
-        projectId: "teamawesome-c4e37",
-        storageBucket: "teamawesome-c4e37.appspot.com",
-        messagingSenderId: "426168129967"
-      };
-      firebase.initializeApp(config);
+        var config = {
+            // ...
+        };
+        firebase.initializeApp(config);
     </script>
+
+  
 <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script> <!-- jquery -->
 <script src="assets/javascript/materialize.min.js"></script>
 <script src="assets/javascript/logic.js"></script><!-- our js -->
 </body>
+
 </html>
