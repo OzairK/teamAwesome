@@ -22,7 +22,6 @@
 
 <body>
 
-
     <!-- Top of page -->
     <div class="container">
 
@@ -35,7 +34,9 @@
                                 <a href="sass.html">aa</a>
                             </li>
                             <li>
-                                <button data-target="modal1" class="btn modal-trigger waves-effect waves-light btn modal-trigger">Login</button>
+                               <!-- Modal Trigger -->
+                                <a id="modalBtn" class="waves-effect waves-light btn modal-trigger" href="#modal1">LOGIN</a>
+
                             </li>
         
                             <div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
@@ -178,6 +179,17 @@
 </script>
 <script src="assets/javascript/materialize.min.js"></script>
 <script src="assets/javascript/logic.js"></script><!-- our js -->
+
+<!--  MODAL SCRIPT-->
+<script>
+    $(document).ready(function(){
+        $("#modalBtn").click(function(){
+            $("#modal1").modal();
+        });
+    });
+</script>
+
+
 </body>
 
 </html>
