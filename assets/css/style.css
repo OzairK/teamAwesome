@@ -2,3 +2,8 @@
     height: 400px;
     width: 100%;
 }
+nav .brand-logo{
+    font-family: 'Amita', cursive;
+    font-size:3.1rem;
+    line-height:4.1rem;
+}
