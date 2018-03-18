@@ -11,8 +11,8 @@ var cuisine; //from user
 $("#submit").on("click", function (event){
     event.preventDefault();
     city=capUpper($("#city").val().trim());
-    cuisine=capUpper($("#cuisine").val().trim());
-    console.log(city, cuisine);
+    // cuisine=capUpper($("#cuisine").val().trim());
+    // console.log(city, cuisine);
     getCityInfo(function(){
         getCuisineInfo(function(){
             getRestuarants();
@@ -66,16 +66,19 @@ function getCuisineInfo(callback){
                 cuisine_name= r.cuisine_name;
                 cuisine_id = r.cuisine_id;
                 console.log(r.cuisine_id); //cajun=491 //working
-            };        
+            };
+            
+            //create option, add class/attr/text, and append to dropdown menu
+            var cuisineOption=$("<option>").addClass("cuisineOptionBox").attr("value",r.cuisine_id).text(r.cuisine_name);
+            $("#cuisineSearch").append(cuisineOption);
+            
         };
-        console.log(allCuisines.join(", ")); //when using array
-        console.log(allCuisines); //object of names and ids
-        $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
-        for (var j=0; j<allCuisines.length; j++){
-            $("#cuisines-list").append(allCuisines[j].name + " - ");
-        };
+        // console.log(allCuisines); //object of names and ids
+        // $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
+        // for (var j=0; j<allCuisines.length; j++){
+        //     $("#cuisines-list").append(allCuisines[j].name + " - ");
+        // }; //delete later
         callback();
-        return cuisine_name;//not working
     });
 };
 
@@ -92,8 +95,11 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
         $("#restaurants-list").append("<br><br><strong>List of all restaurants for " + cuisine_name + " in " + city_name + " : </strong><br>");
         for (var j=0; j<response.restaurants.length; j++){
             var r=response.restaurants[j].restaurant;
+            // console.log(r);
             var rl=r.location;
+            // console.log(rl);
             var ru=r.user_rating;
+            // console.log(ru);
             //allRestaurants.location.latittude
             allRestaurants[j]={
                 "name":r.name,
@@ -104,18 +110,21 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
                     "city":rl.city,
                     "latitude":rl.latitude,
                     "longitude":rl.longitude,
-                    "zipcode":zipcode
+                    "zipcode":rl.zipcode
                 },
-                "menu":menu_url,
-                "price":price_range,
+                "menu":r.menu_url,
+                "price":r.price_range,
                 "user_rating":{
                     "avg":ru.aggregate_rating,
                     "rating_word":ru.rating_text,
                     "votes":ru.votes
                 }
             };
-            $("#restaurants-list").append(r.name + " - ");
+            // console.log(allRestaurants);
+
+            $("#restaurants-list").append(r.name + " - "); //delete later
         }; 
+        console.log(allRestaurants);
     });
 };
 
