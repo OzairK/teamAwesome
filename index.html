@@ -33,10 +33,8 @@
             <div class="nav-wrapper light-green darken-1">
                 <img src="heartfoodT.gif" width="80px" height="66">
                 <a href="#" class="brand-logo">My Veggie Eats</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a href="link goes here">link</a>
-                    </li>
+                <ul id="nav-mobile" class="right">
+                    
                     <li>
                         <!-- Login Modal Trigger -->
                         <a id="modalBtn" class="waves-effect waves-light btn modal-trigger" href="#modal1">LOGIN</a>
@@ -80,17 +78,13 @@
                             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
                         </div>
                     </div>
-
-                    <li>
-                        <a href="collapsible.html">Register</a>
-                    </li>
                 </ul>
             </div>
         </nav>
 
 
         <!-- Search boxes -->
-        <div class="row">
+        <div class="row light-green lighten-1">
             
           <form>
 
@@ -133,7 +127,22 @@
 
             <!-- Left column:  Google Map/tabs -->
             <div id="googleAPI" class="col s12 m6 l8">
-                <div class="row">tabs</div>
+
+                <!-- Map Tabs -->
+                
+                <div class="row light-green lighten-2">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s3"><a  class="active" href="#test1">Tab 1</a></li>
+                            <li class="tab col s3"><a href="#test2">Tab 2</a></li>
+                            <li class="tab col s3"><a href="#test3">Tab 3</a></li>
+                            <li class="tab col s3"><a href="#test4">Tab 4</a></li>
+                        </ul>
+                    </div>
+                            
+                </div>
+
+                <!-- Map -->
                 <div class="row">
                     <div id="map"></div>
                     !</div>
@@ -212,9 +221,7 @@
 
 <!-- Site Javascript Logic -->   
 <script src="assets/javascript/logic.js"></script>
-<!-- <script src="assets/javascript/googleApi.js"></script> -->
-
-<script src="assets/javascript/googleApi-krisversion.js"></script>
+<script src="assets/javascript/googleApi.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHDpeaH0pq2ESqRK_mZLUkzJ6hUTdQ1TQ&callback=initMap">
 </script>
 
