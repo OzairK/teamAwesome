@@ -1,3 +1,17 @@
+
+
+    $(document).ready(function () {
+        // Search Dropdowm Menu: Materialize function call
+        $('select').material_select();
+
+        //  Run LOGIN  MODAL
+        $("#modalBtn").click(function () {
+            $("#modal1").modal();
+        });
+    });
+
+
+
 //get location coordinates
 
 //from form get:
