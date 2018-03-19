@@ -92,26 +92,31 @@
         <div class="row">
             
           <form>
+
+            <div class="col s3">
+                <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light right red" value="Search"><i class="material-icons prefix">search</i> </button> 
+             </div>
             
             <div id="cuisineSearch" class="input-field col s12 m3">
                 <select>
                     <option value="" selected>By Cuisine</option>
+                    <option value="1">defaut 1</option>
+                    <option value="2">defaut 2</option>
+                    <option value="3">defaut 3</option>
                 </select> 
             </div>
 
             <div class="col s12 m3 l3 input-field">
-                <input placeholder="Thai Jasmine" id="restaurant" type="text">
-                <label for="restaurant">Search by Name</label>
+                <input id="restaurant" type="text">
+                <label for="restaurant">By Restaurant Name</label>
             </div>
 
             <div class="col s12 m3 l3 input-field">
-                <input placeholder="Houston" id="city" type="text">
-                <label for="city">Search by Location</label>
+                <input id="city" type="text">
+                <label for="city">By Location</label>
             </div>
 
-            <div class="col s3">
-            <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light red" value="Search"><i class="material-icons prefix">search</i> </button> 
-            </div>
+            
           </form>
         </div>
 
@@ -134,10 +139,31 @@
 
             <!-- Right column:  Zomato restaurants/reviews/notes -->
             <div id="zomatoAPI" class="col s12 m6 l4">
-                <div class="row" id="listing">
-                    
-                        <span id="restaurants-list"></span>
-               </div>
+
+                <!-- Detail listing of either first in list or user choice goes here -->
+                <div class="row" id="photo">
+                        <span id="restaurant-photo">Chosen Restaurant: photo</span>
+                </div>
+                <div class="row" id="listingDetails">
+                        <span id="restaurants-big">Chosen Restaurant: listing</span>
+                </div>
+
+                
+                <!-- User Notes from Firebase -->
+                <div class="row" id="notes">
+                        <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
+                </div>
+                <!-- MODAL to add/edit/delete notes -->
+                <div class="row" id="editNote">
+                        <span id="noteModal">NotesModal: Add/edit/delete user notes</span>
+                </div>
+
+
+                <!-- We can place additional listings here with less detail here -->
+                <!-- Scrollable listing goes here (cap at some number?) -->
+                <div class="row" id="listings">
+                        <div class="col"><span id="restaurants-list">Additional Restaurants: scrolling list here</span></div>
+                </div>
             </div>
         
         </div>
