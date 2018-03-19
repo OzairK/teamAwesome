@@ -50,3 +50,10 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     var userPassword = childSnapshot.val().password;
     var userEmail = childSnapshot.val().email;
 });
+
+firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
