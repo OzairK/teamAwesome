@@ -8,17 +8,56 @@
 //place to search a restaurant to also do this
 var city; //from user
 var cuisine; //from user
+var restName;
+var generalSearch;
 $("#submit").on("click", function (event){
     event.preventDefault();
+    generalSearch=true;
     city=capUpper($("#city").val().trim());
-    // cuisine=capUpper($("#cuisine").val().trim());
-    // console.log(city, cuisine);
-    getCityInfo(function(){
-        getCuisineInfo(function(){
-            getRestuarants();
-        });
+    restName=capUpper($("#restaurant").val().trim());
+    console.log(restName);
+    if (restName===""){
+        gereralSearch=true;
+        // console.log("true");
+    }
+    else {
+        generalSearch=false; 
+        // console.log("false");
+    };
+    console.log(generalSearch, restName);
+    //validate that city has been entered before finding cuisines and/or restaurant
+    if (city===""){
+        alert("enter city");
+        console.log(city);
+    }
+    else {
+        city=capUpper($("#city").val().trim());
+        if (generalSearch){
+            console.log("running gen search");
+            getCityInfo(function(){
+                getCuisineInfo(function(){
+                    getRestuarants();
+                })
+            })
+        }
+        else {
+            console.log("running specific search");
+            getCityInfo(function(){
+                getSpecificRest();
+            })
+        };
+    };
+
+        // getCityInfo(function(){
+        //     getCuisineInfo(function(){
+        //         getRestuarants(function(){
+        //             getSpecificRest();
+        //         });
+        //     });
+        // });
     });
-});
+    // cuisine=capUpper($("#cuisine").val().trim());
+// });
 
 var apiKey="134929701576f37675a021f1de544eed";
 
@@ -29,6 +68,7 @@ var entity_type;
 //gives location info for use in other queries; also gives suggestd city name from a search word (use this function for search??)
 //gives location information for inputed city, Ex: name, city_id, city_type
 function getCityInfo(callback){
+    console.log("running getCityInfo; always run");
     queryUrlLocation="https://developers.zomato.com/api/v2.1/locations?query="+city; 
     $.ajax({
         url:queryUrlLocation,
@@ -51,7 +91,9 @@ var allCuisines=[]; //list of all cuisines and ids in obj
 // var allCuisines=[]; //list all cuisines in array
 //gives list of cuisine types for a city
 function getCuisineInfo(callback){
-    queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
+    console.log("running getCuisineInfo; always on general search");
+    if (!generalSearch)return;
+    console.log(generalSearch+" running getCuisineInfo");queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
     $.ajax({
         url:queryUrlCuisines,
         method:"GET",
@@ -85,7 +127,10 @@ function getCuisineInfo(callback){
 var allRestaurants=[];
 // list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
 function getRestuarants(){
-var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
+    console.log("running getRestaurants; only on general search");
+    if (!generalSearch)return;
+    console.log(generalSearch+" running getRestaurants");
+    var             queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
     $.ajax({
         url:queryUrlRestaurants,
         method:"GET",
@@ -95,12 +140,8 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
         $("#restaurants-list").append("<br><br><strong>List of all restaurants for " + cuisine_name + " in " + city_name + " : </strong><br>");
         for (var j=0; j<response.restaurants.length; j++){
             var r=response.restaurants[j].restaurant;
-            // console.log(r);
             var rl=r.location;
-            // console.log(rl);
             var ru=r.user_rating;
-            // console.log(ru);
-            //allRestaurants.location.latittude
             allRestaurants[j]={
                 "name":r.name,
                 "id":r.id,
@@ -128,13 +169,73 @@ var queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id
     });
 };
 
+var querySpecificRest;
+var specific_rest_id;
+var specificRest;
+//function to get restaurant data from search bar
+function getSpecificRest(){
+    console.log(restName);
+    //if text in search by name bar, run this
+    //get rest id of text entered
+    if (generalSearch) return;
+    console.log("running getSpecifRest");
+    querySpecificRest="https://developers.zomato.com/api/v2.1/search?entity_id="+city+"&entity_type="+entity_type+"&q=hobbit%20cafe"; //change search words hobbit, cafe
+    $.ajax({
+        url:querySpecificRest,
+        method:"GET",
+        headers: {"user-key": apiKey}
+    }).then(function(response) {
+        var r=response.restaurants[0].restaurant;
+        var rl=r.location;
+        var ru=r.user_rating;
+        console.log(response);
+        if (r.name===restName) {
+            specific_rest_id=r.id;
+            console.log(specific_rest_id);
+
+            querySpecificRest="https://developers.zomato.com/api/v2.1/restaurant?res_id="+specific_rest_id;
+            $.ajax({
+                url:querySpecificRest,
+                method:"GET",
+                headers: {"user-key": apiKey}
+            }).then(function(response) {
+                specificRest={
+                    "name":r.name,
+                    "id":r.id,
+                    "image":r.featured_image,
+                    "location":{
+                        "address":rl.address,
+                        "city":rl.city,
+                        "latitude":rl.latitude,
+                        "longitude":rl.longitude,
+                        "zipcode":rl.zipcode
+                    },
+                    "menu":r.menu_url,
+                    "price":r.price_range,
+                    "user_rating":{
+                        "avg":ru.aggregate_rating,
+                        "rating_word":ru.rating_text,
+                        "votes":ru.votes
+                    }
+                }
+                console.log(specificRest);
+            });
+        }
+        else {
+            alert("no restaurant by that name");
+        };
+    });
+};
+
     // $("#form")[0].reset();
 
 function capUpper(string){
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    var splitStr = string.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' '); 
 };
-
-
 
 function initMap() {
     var uluru = { lat: 29.760, lng: -95.369 };
