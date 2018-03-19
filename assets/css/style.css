@@ -7,6 +7,10 @@ nav .brand-logo{
     font-size:3.1rem;
     line-height:4.1rem;
 }
+.nav-wrapper {
+    margin-left: -.75rem;
+    margin-right: -.75rem;
+}
 html {
     /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
   }
@@ -27,4 +31,7 @@ html {
 }
 .searchDiv{
     margin-top:20px;
+}
+label {
+    color: black;
 }
