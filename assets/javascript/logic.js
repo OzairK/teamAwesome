@@ -176,11 +176,13 @@ function getRestuarants(){
                     "rating_word":ru.rating_text,
                     "votes":ru.votes
                 }
+
             };
             // console.log(allRestaurants);
-
             $("#restaurants-list").append(r.name + " - "); //delete later
         }; 
+                    initMap();
+
         console.log(allRestaurants);
     });
 };
