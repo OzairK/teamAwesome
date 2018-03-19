@@ -3,12 +3,12 @@
     width: 100%;
 }
 nav .brand-logo{
-    /*font-family: 'Amita', cursive;*/
+    font-family: 'Amita', cursive;
     font-size:3.1rem;
     line-height:4.1rem;
 }
 html {
-    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+    /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
   }
 .waves-effect.waves-blue{
     /* The alpha value allows the text and background color
@@ -17,4 +17,14 @@ html {
    }
 #listing{
 
+}
+.cuisineOptionBox{
+    font-size:16px;
+    color:#26a69a;
+    display:block;
+    line-height:22px;
+    padding:14px 16px;
+}
+.searchDiv{
+    margin-top:20px;
 }

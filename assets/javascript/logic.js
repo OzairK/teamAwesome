@@ -24,7 +24,7 @@ var city; //from user
 var cuisine; //from user
 var restName;
 var generalSearch;
-$("#submit").on("click", function (event){
+$("#searchIt").on("click", function (event){
     event.preventDefault();
     generalSearch=true;
     city=capUpper($("#city").val().trim());
@@ -49,9 +49,10 @@ $("#submit").on("click", function (event){
         if (generalSearch){
             console.log("running gen search");
             getCityInfo(function(){
-                getCuisineInfo(function(){
-                    getRestuarants();
-                })
+                getCuisineInfo();
+                // getCuisineInfo(function(){
+                    // getRestuarants();
+                // })
             })
         }
         else {
@@ -61,17 +62,16 @@ $("#submit").on("click", function (event){
             })
         };
     };
-
-        // getCityInfo(function(){
-        //     getCuisineInfo(function(){
-        //         getRestuarants(function(){
-        //             getSpecificRest();
-        //         });
-        //     });
-        // });
     });
     // cuisine=capUpper($("#cuisine").val().trim());
 // });
+
+$(document).on("click", ".cuisineOptionBox", function(){
+    event.preventDefault();
+    cuisine_id=$(this).val();
+    console.log(this);
+    getRestuarants();
+});
 
 var apiKey="134929701576f37675a021f1de544eed";
 
@@ -104,7 +104,7 @@ var cuisine_name;
 var allCuisines=[]; //list of all cuisines and ids in obj
 // var allCuisines=[]; //list all cuisines in array
 //gives list of cuisine types for a city
-function getCuisineInfo(callback){
+function getCuisineInfo(){
     console.log("running getCuisineInfo; always on general search");
     if (!generalSearch)return;
     console.log(generalSearch+" running getCuisineInfo");queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
@@ -125,16 +125,17 @@ function getCuisineInfo(callback){
             };
             
             //create option, add class/attr/text, and append to dropdown menu
-            var cuisineOption=$("<option>").addClass("cuisineOptionBox").attr("value",r.cuisine_id).text(r.cuisine_name);
-            $("#cuisineSearch").append(cuisineOption);
-            
+            var cuisineOption=$("<li>").addClass("cuisineOptionBox").attr("value",r.cuisine_id).text(r.cuisine_name);
+            $(".select-dropdown").append(cuisineOption);
         };
+        console.log(allCuisines);
+
         // console.log(allCuisines); //object of names and ids
         // $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
         // for (var j=0; j<allCuisines.length; j++){
         //     $("#cuisines-list").append(allCuisines[j].name + " - ");
         // }; //delete later
-        callback();
+        // callback();
     });
 };
 
@@ -142,6 +143,7 @@ var allRestaurants=[];
 // list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
 function getRestuarants(){
     console.log("running getRestaurants; only on general search");
+    console.log(cuisine_id);
     if (!generalSearch)return;
     console.log(generalSearch+" running getRestaurants");
     var             queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
@@ -174,11 +176,13 @@ function getRestuarants(){
                     "rating_word":ru.rating_text,
                     "votes":ru.votes
                 }
+
             };
             // console.log(allRestaurants);
-
             $("#restaurants-list").append(r.name + " - "); //delete later
         }; 
+                    initMap();
+
         console.log(allRestaurants);
     });
 };
