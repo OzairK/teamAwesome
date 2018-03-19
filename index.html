@@ -8,8 +8,9 @@
     
     <!-- STYLESHEETS  -->
 
-    <!-- Google Fonts for Materialize -->
+    <!-- Google Fonts for Materialize/CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amita" rel="stylesheet">
 
     <!-- Materialize: Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -30,7 +31,7 @@
 
         <nav>
             <div class="nav-wrapper light-green darken-1">
-                <img src="heartfood.jpg" width="80px" height="66">
+                <img src="heartfoodT.gif" width="80px" height="66">
                 <a href="#" class="brand-logo">My Veggie Eats</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
@@ -93,7 +94,7 @@
             
           <form>
 
-            <div class="col s3">
+            <div class="col s3 searchDiv">
                 <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light right red" value="Search"><i class="material-icons prefix">search</i> </button> 
              </div>
             
@@ -154,6 +155,7 @@
                 <div class="row" id="notes">
                         <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
                 </div>
+
                 <!-- MODAL to add/edit/delete notes -->
                 <div class="row" id="editNote">
                         <span id="noteModal">NotesModal: Add/edit/delete user notes</span>
