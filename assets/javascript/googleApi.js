@@ -15,7 +15,9 @@ function initMap() {
                lat: latInt,
                lng: longInt
             },
-            content: allRestaurants[i].name 
+            content: allRestaurants[i].name,
+            imageURL: allRestaurants[i].image
+            
         }
     };
         console.log(markers);
@@ -48,6 +50,12 @@ function initMap() {
 
             marker.addListener('click', function () {
                 infoWindow.open(map, marker);
+                alert(newMarker.content);
+                $("#restaurant-photo").html(`<img src=${newMarker.imageURL}  class="restaurantImage">`);
+                $("#restaurants-big").text(newMarker.content);
+                console.log(newMarker.imageURL);
+
+                
             });
         }
     }
