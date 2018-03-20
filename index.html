@@ -36,26 +36,20 @@
                 <ul id="nav-mobile" class="right">
                     
                     <li>
-                        <!-- Login Modal Trigger -->
-                        <a id="modalBtn" class="waves-effect waves-light btn modal-trigger" href="#modal1">LOGIN</a>
+                    <!-- Existing User:Login Modal Trigger -->
+                    <a id="modalBtn" class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign In</a>
                     </li>
 
-                    <!-- LOGIN MODAL-->
-                    <div id="modal1" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+                        <!-- Existing User:LOGIN MODAL-->
+                        <div id="modal1" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
                         <div class="modal-content">
-                            <h4>Create Account</h4>
-                            <br>
-                            <br>
+                            <h4>Sign In</h4><br><br>
                             <div class="row">
-                                <form class="col s12">
+                                <form id="existingLogin" class="col s12">
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="first_name" type="text" class="validate">
-                                            <label for="first_name">First Name</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="last_name" type="text" class="validate">
-                                            <label for="last_name">Last Name</label>
+                                            <input id="email" type="text" class="validate">
+                                            <label for="email">Email</label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -63,21 +57,63 @@
                                             <input id="password" type="password" class="validate">
                                             <label for="password">Password</label>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Email</label>
-                                        </div>
-                                    </div>
+                                    </div>  
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitUser">Submit</a>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitLogin">Submit</a>
                         </div>
                     </div>
+
+
+
+                    <li>
+                        <!-- New User:Login Modal Trigger -->
+                        <a id="modalBtn2" class="waves-effect waves-light btn modal-trigger" href="#modal2">Register</a>
+                        </li>
+    
+                        <!-- New User:LOGIN MODAL-->
+                        <div id="modal2" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+                            <div class="modal-content">
+                                <h4>Create Account</h4>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <input id="first_name" type="text" class="validate">
+                                                <label for="first_name">First Name</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="last_name" type="text" class="validate">
+                                                <label for="last_name">Last Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="password" type="password" class="validate">
+                                                <label for="password">Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="email" type="email" class="validate">
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitRegister">Submit</a>
+                            </div>
+                        </div>
+
+
                 </ul>
             </div>
         </nav>
@@ -90,7 +126,12 @@
 
             <div class="col s3 searchDiv">
                 <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light right red" value="Search"><i class="material-icons prefix">search</i> </button> 
-             </div>
+            </div>
+
+            <div class="col s12 m3 l3 input-field">
+                    <input id="city" type="text">
+                    <label for="city">By Location</label>
+            </div>
             
             <div id="cuisineSearch" class="input-field col s12 m3">
                 <select id="drop-down">
@@ -107,11 +148,7 @@
                 <label for="restaurant">By Restaurant Name</label>
             </div>
 
-            <div class="col s12 m3 l3 input-field">
-                <input id="city" type="text">
-                <label for="city">By Location</label>
-            </div>
-
+            
             
           </form>
         </div>
@@ -228,7 +265,6 @@
 
 <script src="assets/javascript/googleApi-krisversion.js"></script>
 
-<script src="assets/javascript/googleApi.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHDpeaH0pq2ESqRK_mZLUkzJ6hUTdQ1TQ&callback=initMap">
 </script>
 
