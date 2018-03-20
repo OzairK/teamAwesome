@@ -1,16 +1,21 @@
 $(document).ready(function () {
-    // Search Dropdowm Menu: Materialize function call
-    $('select').material_select();
+        // Search Dropdowm Menu: Materialize function call
+        $('select').material_select();
+        // Map tabs : Materialize function call
+        $('.tabs').tabs();
 
-    //  Exisitng User : LOGIN  MODAL
-    $("#modalBtn").click(function () {
-        $("#modal1").modal();
-    });
-
-        //  New User : LOGIN  MODAL
-        $("#modalBtn2").click(function () {
-        $("#modal2").modal();
-    });
+        //  Exisitng User : LOGIN  MODAL
+        $("#modalBtn").click(function () {
+            $("#modal1").modal();
+        });
+         //  New User : LOGIN  MODAL
+         $("#modalBtn2").click(function () {
+            $("#modal2").modal();
+        });
+        //  Map Tabs : Add a Tab MODAL
+        $("#modalBtnTab").click(function () {
+            $("#modalTabs").modal();
+        });
 });
 
 var apiKey="134929701576f37675a021f1de544eed";
