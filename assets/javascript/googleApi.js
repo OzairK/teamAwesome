@@ -6,31 +6,34 @@ function initMap() {
 
     
     // array of all the restaurants, with coordinates for its markers
-    var markers = [
-        {
-            coords: { lat: 29.7604, lng: -95.3698 },
-            iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            content: '<h1>Name of restaurant 1</h1>'
-        },
-        {
-            coords: { lat: 29.7609, lng: -95.361 },
-            content: '<h1>Name of restaurant 2</h1>'
-        },
-        {
-            coords: { lat: 29.6, lng: -95.3691 }
+    var markers=[];
+    for (var i=0; i<allRestaurants.length; i++){
+        var latInt = parseFloat(allRestaurants[i].location.latitude);
+        var longInt=parseFloat(allRestaurants[i].location.longitude);
+        markers[i] = {
+            coords:{
+               lat: latInt,
+               lng: longInt
+            },
+            content: allRestaurants[i].name 
         }
-    ];
+    };
+        console.log(markers);
+
 
     for (var i = 0; i < markers.length; i++) {
         addRestaurantMarker(markers[i]);
+        // console.log(markers[i]);
     }
 
     // Add a new restaurant marker 
     function addRestaurantMarker(newMarker) {
+        console.log(newMarker);
         var marker = new google.maps.Marker({
             position: newMarker.coords,
             map: map,
         });
+        console.log(marker);
 
         // is there a specific icon to display? if so, set it. 
         if (newMarker.iconImage) {
@@ -49,17 +52,4 @@ function initMap() {
         }
     }
 
-    // var marker = new google.maps.Marker({
-    //     position: uluru,
-    //     map: map,
-    //     icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-    // });
-
-    // var infoWindow = new google.maps.InfoWindow({
-    //     content: "<h2> this is the content </h2>"
-    // });
-
-    // marker.addListener("click", function () {
-    //     infoWindow.open(map, marker);
-    // })
 }
