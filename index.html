@@ -242,14 +242,39 @@
                 </div>
 
                 
-                <!-- User Notes from Firebase -->
-                <div class="row" id="notes">
-                        <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
-                </div>
+            <!-- User Notes from Firebase -->
+            <div class="row pink" id="notes">
+                <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
+            </div>
 
-                <!-- MODAL to add/edit/delete notes -->
-                <div class="row" id="editNote">
-                        <span id="noteModal">NotesModal: Add/edit/delete user notes</span>
+            <!-- MODAL to add/edit/delete notes -->
+            <div class="row" id="userNotes">
+                 <div class="col s3">
+                    <!-- Add Tab Modal Trigger -->
+                    <a id="modalBtnNotes" class="waves-effect waves-light btn modal-trigger pink"  href="#modalNotes"><i class="material-icons prefix">edit</i></a>
+                </div>
+                 <!-- Map Tab MODAL-->
+                <div id="modalNotes" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
+                <div class="modal-content">
+                    <h4>My Dining Notes: </h4>
+                    <div class="row">
+                        <form id="notePad" class="col s12">
+            
+                            <div class="input-field col s12">
+                                <textarea id="fbnotes" class="materialize-textarea">skdfsdfsdf  existing fb notes go here- dynamically fill</textarea>
+                            </div>
+                                
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editNotes">Submit</a>
+                                     </div>
+                                </div>
+
+
+
                 </div>
 
 
@@ -306,14 +331,13 @@
     
 
 <!-- Site Javascript Logic -->   
-<script src="assets/javascript/logic.js"></script>
+<script src="./assets/javascript/logic.js"></script>
 
-<script src="assets/javascript/firebase.js"></script>
-<script src="assets/javascript/googleApi.js"></script>
+<script src="./assets/javascript/firebase.js"></script>
+<script src="./assets/javascript/googleApi.js"></script>
 
-<!-- <script src="assets/javascript/googleApi.js"></script> -->
 
-<<<<<<< HEAD
+<!--<<<<<<< HEAD
 <script src="assets/javascript/googleApi-krisversion.js"></script>
 
 <<<<<<< HEAD
@@ -322,9 +346,9 @@
 =======
 >>>>>>> master
 =======
->>>>>>> 12dd277ed997bead0857cc26d5dbbbdba4c85ed7
+>>>>>>> 12dd277ed997bead0857cc26d5dbbbdba4c85ed7-->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHDpeaH0pq2ESqRK_mZLUkzJ6hUTdQ1TQ&callback=initMap">
-</script>
+</script>-->
 
 </body>
 
