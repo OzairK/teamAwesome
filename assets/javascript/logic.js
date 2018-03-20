@@ -53,43 +53,34 @@ $("#searchIt").on("click", function (event){
     generalSearch=true;
     city=capUpper($("#city").val().trim());
     restName=capUpper($("#restaurant").val().trim());
-    console.log(city);
-    console.log(restName);
+    // console.log(city);
+    // console.log(restName);
     if (restName===""){
         gereralSearch=true;
-        // console.log("true");
     }
     else {
         generalSearch=false; 
-        // console.log("false");
     };
     console.log(generalSearch, restName);
     //validate that city has been entered before finding cuisines and/or restaurant
-    if (city===""){
-        // alert("enter city");
-        console.log(city);
-    }
-    else {
+    // if (city===""){
+    //     // alert("enter city");
+    //     console.log(city);
+    // }
+    // else {
         city=capUpper($("#city").val().trim());
         if (generalSearch){
-            console.log("running gen search");
             getCityInfo(function(){
                 getCuisineInfo();
-                // getCuisineInfo(function(){
-                    // getRestuarants();
-                // })
             })
         }
         else {
-            console.log("running specific search");
             getCityInfo(function(){
                 getSpecificRest();
             })
         };
-    };
-    });
-    // cuisine=capUpper($("#cuisine").val().trim());
-// });
+    // };
+});
 
 $(document).on("click", ".cuisineOptionBox", function(){
     event.preventDefault();
@@ -190,7 +181,7 @@ function getRestuarants(){
             allRestaurants[j]={
                 "name":r.name,
                 "id":r.id,
-                "image":r.featured_image,
+                "image":r.photos_url,
                 "location":{
                     "address":rl.address,
                     "city":rl.city,
