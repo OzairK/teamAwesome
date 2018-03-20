@@ -30,12 +30,11 @@ function initMap() {
 
     // Add a new restaurant marker 
     function addRestaurantMarker(newMarker) {
-        console.log(newMarker);
+        // console.log(newMarker);
         var marker = new google.maps.Marker({
             position: newMarker.coords,
             map: map,
         });
-        console.log(marker);
 
         // is there a specific icon to display? if so, set it. 
         if (newMarker.iconImage) {

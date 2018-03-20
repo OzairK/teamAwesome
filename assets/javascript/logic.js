@@ -1,21 +1,31 @@
+$(document).ready(function () {
+    // Search Dropdowm Menu: Materialize function call
+    $('select').material_select();
 
-
-    $(document).ready(function () {
-        // Search Dropdowm Menu: Materialize function call
-        $('select').material_select();
-
-        //  Exisitng User : LOGIN  MODAL
-        $("#modalBtn").click(function () {
-            $("#modal1").modal();
-        });
-
-         //  New User : LOGIN  MODAL
-         $("#modalBtn2").click(function () {
-            $("#modal2").modal();
-        });
+    //  Exisitng User : LOGIN  MODAL
+    $("#modalBtn").click(function () {
+        $("#modal1").modal();
     });
 
+        //  New User : LOGIN  MODAL
+        $("#modalBtn2").click(function () {
+        $("#modal2").modal();
+    });
+});
 
+var apiKey="134929701576f37675a021f1de544eed";
+
+initRest();
+
+//populate initial map with veggie restaurants
+function initRest(){
+    console.log("working");
+    cuisine_id=308;
+    entity_type="city";
+    city_id=277;
+    generalSearch=true;
+    getRestuarants();
+};
 
 //get location coordinates
 
@@ -34,6 +44,7 @@ $("#searchIt").on("click", function (event){
     generalSearch=true;
     city=capUpper($("#city").val().trim());
     restName=capUpper($("#restaurant").val().trim());
+    console.log(city);
     console.log(restName);
     if (restName===""){
         gereralSearch=true;
@@ -46,7 +57,7 @@ $("#searchIt").on("click", function (event){
     console.log(generalSearch, restName);
     //validate that city has been entered before finding cuisines and/or restaurant
     if (city===""){
-        alert("enter city");
+        // alert("enter city");
         console.log(city);
     }
     else {
@@ -73,12 +84,11 @@ $("#searchIt").on("click", function (event){
 
 $(document).on("click", ".cuisineOptionBox", function(){
     event.preventDefault();
-    cuisine_id=$(this).val();
+    var c=$(this).val();
+    cuisine_id="308%2C%20"+c;
     console.log(this);
     getRestuarants();
 });
-
-var apiKey="134929701576f37675a021f1de544eed";
 
 var queryUrlLocation;
 var city_id;
@@ -113,6 +123,7 @@ function getCuisineInfo(){
     console.log("running getCuisineInfo; always on general search");
     if (!generalSearch)return;
     console.log(generalSearch+" running getCuisineInfo");queryUrlCuisines="https://developers.zomato.com/api/v2.1/cuisines?city_id="+city_id; 
+
     $.ajax({
         url:queryUrlCuisines,
         method:"GET",
@@ -125,8 +136,8 @@ function getCuisineInfo(){
             allCuisines.push(r.cuisine_name);
             if (r.cuisine_name === cuisine){
                 cuisine_name= r.cuisine_name;
-                cuisine_id = r.cuisine_id;
-                console.log(r.cuisine_id); //cajun=491 //working
+                cuisine_id =r.cuisine_id;
+                console.log("308%2C%20"+r.cuisine_id); //cajun=491 //working
             };
             
             //create option, add class/attr/text, and append to dropdown menu
@@ -145,20 +156,24 @@ function getCuisineInfo(){
 };
 
 var allRestaurants=[];
+var queryUrlRestaurants;
 // list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
 function getRestuarants(){
     console.log("running getRestaurants; only on general search");
     console.log(cuisine_id);
     if (!generalSearch)return;
-    console.log(generalSearch+" running getRestaurants");
-    var             queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
+    queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
+
+// https://developers.zomato.com/api/v2.1/search?entity_id=277&entity_type=city&cuisines=308%2C%2073
+
+    console.log(queryUrlRestaurants);
+    console.log(cuisine_id, entity_type, city_id);
     $.ajax({
         url:queryUrlRestaurants,
         method:"GET",
         headers: {"user-key": apiKey} //api key
     }).then(function(response) {
         console.log(response.restaurants); //lists 20 restaurants
-        $("#restaurants-list").append("<br><br><strong>List of all restaurants for " + cuisine_name + " in " + city_name + " : </strong><br>");
         for (var j=0; j<response.restaurants.length; j++){
             var r=response.restaurants[j].restaurant;
             var rl=r.location;
@@ -181,14 +196,9 @@ function getRestuarants(){
                     "rating_word":ru.rating_text,
                     "votes":ru.votes
                 }
-
             };
-            // console.log(allRestaurants);
-            $("#restaurants-list").append(r.name + " - "); //delete later
         }; 
-                    initMap();
-
-        console.log(allRestaurants);
+        initMap();
     });
 };
 
