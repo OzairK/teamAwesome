@@ -4,9 +4,14 @@
         // Search Dropdowm Menu: Materialize function call
         $('select').material_select();
 
-        //  Run LOGIN  MODAL
+        //  Exisitng User : LOGIN  MODAL
         $("#modalBtn").click(function () {
             $("#modal1").modal();
+        });
+
+         //  New User : LOGIN  MODAL
+         $("#modalBtn2").click(function () {
+            $("#modal2").modal();
         });
     });
 
