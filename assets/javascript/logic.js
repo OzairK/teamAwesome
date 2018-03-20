@@ -16,6 +16,10 @@ $(document).ready(function () {
         $("#modalBtnTab").click(function () {
             $("#modalTabs").modal();
         });
+        //  User Notes  MODAL
+        $("#modalBtnNotes").click(function () {
+            $("#modalNotes").modal();
+        });
 });
 
 var apiKey="134929701576f37675a021f1de544eed";
