@@ -15,8 +15,11 @@ function initMap() {
                lat: latInt,
                lng: longInt
             },
-            content: allRestaurants[i].name,
-            imageURL: allRestaurants[i].image
+            name: allRestaurants[i].name,
+            imageURL: allRestaurants[i].image,
+            avgRating: allRestaurants[i].user_rating.avg,
+            address: allRestaurants[i].location.address,
+            priceRange:allRestaurants[i].price
             
         }
     };
@@ -41,18 +44,26 @@ function initMap() {
             marker.setIcon(newMarker.iconImage);
         }
 
-        // is there content to display? if so, display when icon is clicked
-        if (newMarker.content) {
+        // is there name to display? if so, display when icon is clicked
+        if (newMarker.name) {
             var infoWindow = new google.maps.InfoWindow({
-                content: newMarker.content
+                content: newMarker.name
             });
 
             marker.addListener('click', function () {
                 infoWindow.open(map, marker);
-                alert(newMarker.content);
+                if(newMarker.imageURL){
                 $("#restaurant-photo").html(`<img src=${newMarker.imageURL}  class="restaurantImage">`);
-                $("#restaurants-big").text(newMarker.content);
-                console.log(newMarker.imageURL);
+                }
+                else{
+                    var stockImage = "http://img1.cookinglight.timeinc.net/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/2017/07/main/veggie-tofu-stir-fry-ck.jpg?itok=V88FQY4y";
+                    $("#restaurant-photo").html(`<img src=${stockImage} class="restaurantImage">`);  
+                }
+                $("#restaurants-big").html(` <h2>${newMarker.name}</h2> <hr>`);
+
+                $("#restaurant-info").html(`User Rating: ${newMarker.avgRating} <br>
+                Average Price: ${newMarker.priceRange} <br> Address: ${newMarker.address}`);
+            
 
                 
             });

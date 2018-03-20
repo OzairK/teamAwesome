@@ -38,4 +38,17 @@ label {
 
 .restaurantImage{
 max-width: 300px;
+margin-left:20px;
+}
+
+#restaurants-big{
+    font-family: 'Varela', sans-serif;
+    font-size: 1.5em;
+    ;
+
+}
+
+#restaurant-info{
+    font-family: 'Varela', sans-serif;
+    
 }
