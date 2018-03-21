@@ -36,6 +36,11 @@ label {
     color: black;
 }
 
+#zomatoAPI{
+    padding-left:25px;
+    text-align: center;
+}
+
 .restaurantImage{
 max-width: 300px;
 margin-left:20px;
@@ -44,11 +49,17 @@ margin-left:20px;
 #restaurants-big{
     font-family: 'Varela', sans-serif;
     font-size: 1.5em;
-    ;
-
 }
 
 #restaurant-info{
     font-family: 'Varela', sans-serif;
-    
+}
+.tabs{
+    background-color:#aed581;
+}
+.tabs .tab a{
+    font-size:18px;
+}
+.tabs :hover{
+    background-color:#9ccc66;
 }

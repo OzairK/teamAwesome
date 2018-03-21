@@ -70,4 +70,48 @@ function initMap() {
         }
     }
 
+
 }
+
+//get info from form
+// var getAddress=$("#getAddress");
+var getAddress;
+var getCity;
+
+//var for functions below
+var userZip;
+var userAddress;
+var userCity;
+var queryUrlLatLng;
+
+//makes user inputed address ready for google query
+function formatAddress(string, separator){
+    // console.log(string);
+    // console.log(getAddress, getCity);
+    if (string===getAddress){
+        userAddress=string.split(separator);
+        userAddress=userAddress.join("+");
+        // console.log(userAddress);
+    }
+    else{
+        userCity=string.split(separator).join("+");
+        // console.log(userCity);
+    }
+};
+
+//ajax call to get latitude and longitude from user address
+function getLatLng(){
+    queryUrlLatLng="https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+",+"+userCity+",+"+userZip+"&key=AIzaSyBiHE2gWj3PGXzJKZ0DIF7203J7b90-mhY";
+    $.ajax({
+        url:queryUrlLatLng,
+        method:"GET"
+    }).then(function(response){
+        initMapLat=response.results[0].geometry.location.lat;
+        initMapLng=response.results[0].geometry.location.lng;
+        initMap();
+    });
+};
+
+//notes for kris:
+//when user moves map, get new center coordinates and add "search here" button to repopulate different restaurants 
+//add radius to rest. search
