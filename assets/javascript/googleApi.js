@@ -73,6 +73,7 @@ function initMap() {
         }
     }
 
+
 }
 
 //get info from form
@@ -88,17 +89,16 @@ var queryUrlLatLng;
 
 //makes user inputed address ready for google query
 function formatAddress(string, separator){
-    console.log(userAddress, userCity);
-    console.log(string);
-    console.log(getAddress, getCity);
+    // console.log(string);
+    // console.log(getAddress, getCity);
     if (string===getAddress){
         userAddress=string.split(separator);
         userAddress=userAddress.join("+");
-        console.log(userAddress);
+        // console.log(userAddress);
     }
     else{
         userCity=string.split(separator).join("+");
-        console.log(userCity);
+        // console.log(userCity);
     }
 };
 
@@ -115,6 +115,6 @@ function getLatLng(){
     });
 };
 
+//notes for kris:
 //when user moves map, get new center coordinates and add "search here" button to repopulate different restaurants 
-
 //add radius to rest. search
