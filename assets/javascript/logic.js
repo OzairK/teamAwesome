@@ -33,6 +33,8 @@ function initRest(){
     entity_type="city";
     city_id=277;
     generalSearch=true;
+    initMapLat=parseFloat(29.760);
+    initMapLng=parseFloat(-95.369);
     getRestuarants();
 };
 
@@ -89,6 +91,26 @@ $(document).on("click", ".cuisineOptionBox", function(){
     console.log(this);
     getRestuarants();
 });
+
+$(document).on("click", ".tabs a", function(){
+    console.log(this.id);
+    if (this.id === "home"){
+        getAddress="7923 Annola";//change to user entered data
+        //getAddress=$("tabStreet");
+        getCity="Spring";//change to user entered data
+        //getCity=$("tabCity1;")
+        userZip="77379";//change to user entered data
+        // userZip=$("#tabZip");
+        formatAddress(getAddress, " ");
+        formatAddress(getCity," ");
+        getLatLng();
+        initMap();
+    }
+})
+
+//need to give tabs in html, line 211 id with uer inputed name
+//change "Home" to above var
+//get user to input address
 
 var queryUrlLocation;
 var city_id;
@@ -158,13 +180,13 @@ function getCuisineInfo(){
 var allRestaurants=[];
 var queryUrlRestaurants;
 // list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
+//this function calls the initmap function
 function getRestuarants(){
     console.log("running getRestaurants; only on general search");
     console.log(cuisine_id);
     if (!generalSearch)return;
     queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
 
-// https://developers.zomato.com/api/v2.1/search?entity_id=277&entity_type=city&cuisines=308%2C%2073
 
     console.log(queryUrlRestaurants);
     console.log(cuisine_id, entity_type, city_id);
