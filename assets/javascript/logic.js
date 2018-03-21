@@ -1,10 +1,13 @@
+// var initMapLat;
+// var initMapLng;
+
 $(document).ready(function () {
         // Search Dropdowm Menu: Materialize function call
         $('select').material_select();
         // Map tabs : Materialize function call
         $('.tabs').tabs();
 
-        //  Exisitng User : LOGIN  MODAL
+        //  Exisitn User : LOGIN  MODAL
         $("#modalBtn").click(function () {
             $("#modal1").modal();
         });
@@ -126,11 +129,14 @@ function getCityInfo(callback){
         method:"GET",
         headers: {"user-key": apiKey}
     }).then(function(response) {
-        console.log(response);
+        console.log("OZAIR IS HERE", response);
         city_id=response.location_suggestions[0].city_id;
         city_name=response.location_suggestions[0].city_name;
+        initMapLat = parseFloat(response.location_suggestions[0].latitude);
+        initMapLng=parseFloat(response.location_suggestions[0].longitude);
         entity_type=response.location_suggestions[0].entity_type;
-        console.log(city_id, city_name, entity_type);
+        initMap();
+        console.log(city_id, city_name, entity_type, initMapLat, initMapLng);
         callback();
     });
 };
