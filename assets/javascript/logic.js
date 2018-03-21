@@ -203,7 +203,7 @@ function getRestuarants(){
             allRestaurants[j]={
                 "name":r.name,
                 "id":r.id,
-                "image":r.photos_url,
+                "image":r.featured_image,
                 "location":{
                     "address":rl.address,
                     "city":rl.city,
