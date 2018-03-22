@@ -31,7 +31,7 @@ initRest();
 
 //populate initial map with veggie restaurants
 function initRest(){
-    console.log("working");
+    // console.log("working");
     cuisine_id=308;
     entity_type="city";
     city_id=277;
@@ -188,13 +188,13 @@ var queryUrlRestaurants;
 // list of restaurants for inputed cuisine and city, ex: vegetarian in Houston
 //this function calls the initmap function
 function getRestuarants(){
-    console.log("running getRestaurants; only on general search");
-    console.log(cuisine_id);
+    // console.log("running getRestaurants; only on general search");
+    // console.log(cuisine_id);
     if (!generalSearch)return;
     queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" + city_id + "&entity_type=" + entity_type + "&cuisines=" + cuisine_id;
 
 
-    console.log(queryUrlRestaurants);
+    // console.log(queryUrlRestaurants);
     console.log(cuisine_id, entity_type, city_id);
     $.ajax({
         url:queryUrlRestaurants,
