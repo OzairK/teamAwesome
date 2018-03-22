@@ -57,10 +57,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log('not logged in');
   }
 });
-    storageBucket: "teamawesome-f39d7.appspot.com",
-    messagingSenderId: "539466789478"
-};
-firebase.initializeApp(config);
 
 var database = firebase.database();
 
@@ -116,9 +112,17 @@ $("#addTab").on("click", function(event){
     //if first time to add tab...
     database.ref().once("value", function(snapshot){
         snapshot.forEach(function(childsnap){
-            if (childsnap.key!==="tabs"){
+
+            //if there's not a tabs, create it
+            //if tabs <4 push info
+            //else modal with "You've reached the max tabs. Delete one first before adding another."
+            //when add tab, add delete button to modal
+            //if delete btn clicked, delete fb info
+
+
+            // if (childsnap.key!==="tabs"){
                 
-            }      
+            // }      
         });
 
     });
