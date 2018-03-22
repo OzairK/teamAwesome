@@ -17,23 +17,24 @@ var btnLogOut = document.getElementById('btnLogOut');
 
 //Add login event
 btnLogin.addEventListener('click', e => {
-  //   e.preventDefault();
+    e.preventDefault();
   //Get email and password
   var email = txtEmail.value;
   var pass = txtPassword.value;
   var auth = firebase.auth();
-  console.log(auth)
+  console.log(auth);
+  var firebaseUser = auth.firebaseUser;
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
-  console.log('test')
+  console.log('test');
 });
 
 //Add SignUp event
 btnSignUp.addEventListener('click', e => {
   //Get email and pass
   //ToDo: Check 4 REAL email
-  // e.preventDefault();
+  e.preventDefault();
   var email = txtEmail.value;
   var pass = txtPassword.value;
   var auth = firebase.auth();
@@ -41,6 +42,12 @@ btnSignUp.addEventListener('click', e => {
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 });
+
+//Realtime user test
+firebase.auth().onAuthStateChanged(function(observer) {
+        window.observer = observer; // user is undefined if no user signed in
+        console.log(observer);
+       });
 
 //Add a realtime listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
