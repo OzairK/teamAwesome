@@ -1,27 +1,44 @@
+body {
+    /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
+    font-family: 'Varela', sans-serif;
+  }
 #map {
     height: 400px;
     width: 100%;
 }
-nav .brand-logo{
+.row {
+    margin-bottom: 0;
+}
+header .brand-logo{
     font-family: 'Amita', cursive;
     font-size:3.1rem;
+    /*padding-top: 10px;*/
+    padding-left:10px;
     line-height:4.1rem;
+}
+#headerSearch .input-field{
+    border-bottom: white;
 }
 .nav-wrapper {
     margin-left: -.75rem;
     margin-right: -.75rem;
 }
-html {
-    /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
-  }
+input#city{
+    border-bottom: white 1px solid;
+}
+input#restaurant{
+    border-bottom: white 1px solid;
+}
+.select-wrapper input.select-dropdown {
+    color: white;
+    border-bottom: white 1px solid;
+}
 .waves-effect.waves-blue{
     /* The alpha value allows the text and background color
     of the button to still show through. */
      background-color: rgba(59, 38, 175, 0.65);
    }
-#listing{
 
-}
 .cuisineOptionBox{
     font-size:16px;
     color:#26a69a;
@@ -38,21 +55,29 @@ label {
 
 #zomatoAPI{
     padding-left:25px;
-    text-align: center;
+    /*text-align: center;*/
 }
-
+div#photo.row{
+    min-height:150px;
+    background-color:lightgray;
+}
 .restaurantImage{
-max-width: 300px;
-margin-left:20px;
+    max-width: 300px;
+    margin-left:20px;
 }
-
+div#listingDetails.row{
+    min-height:150px;
+    background-color: lightpink;
+}
 #restaurants-big{
-    font-family: 'Varela', sans-serif;
+    min-height:50px;
     font-size: 1.5em;
 }
-
+div#notes.row.pink{
+    min-height:150px;
+}
 #restaurant-info{
-    font-family: 'Varela', sans-serif;
+    
 }
 .tabs{
     background-color:#aed581;
