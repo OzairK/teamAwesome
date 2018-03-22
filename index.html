@@ -11,6 +11,7 @@
     <!-- Google Fonts for Materialize/CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amita" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela" rel="stylesheet">
 
     <!-- Materialize: Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -31,17 +32,21 @@
 
     <!-- Top of page -->
     <div class="container">
-
-        <nav>
-            <div class="nav-wrapper light-green darken-1">
-                <img src="heartfoodT.gif" width="80px" height="66">
-                <a href="#" class="brand-logo">My Veggie Eats</a>
-
-                <ul id="nav-mobile" class="right">
+        
+        <header>
+            <div class="row light-green darken-1">
+                <div class="col s12 m1">
+                   <img src="heartfoodT.gif" width="80px" height="66">
+                </div>
+                <div class="col s12 m9">
+                   <a href="#" class="brand-logo white-text">My Veggie Eats</a>
+                </div>
+                <div class="col s12 m2">
+                <ul class="right">
                     
                     <li>
                     <!-- Existing User:Login Modal Trigger -->
-                    <a id="modalBtn" class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign In</a>
+                    <a id="modalBtn" class="modal-trigger white-text" href="#modal1">Sign In</a>
                     </li>
 
                         <!-- Existing User:LOGIN MODAL-->
@@ -69,13 +74,13 @@
                             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
                             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitLogin">Submit</a>
                         </div>
-                    </div>
+                        </div>
 
 
 
                     <li>
                         <!-- New User:Login Modal Trigger -->
-                        <a id="modalBtn2" class="waves-effect waves-light btn modal-trigger" href="#modal2">Register</a>
+                        <a id="modalBtn2" class="modal-trigger  white-text" href="#modal2">Register</a>
                         </li>
     
                         <!-- New User:LOGIN MODAL-->
@@ -119,15 +124,15 @@
                       
 
                 </ul>
-                
+                </div>
             </div>
-        </nav>
-
+       </header> 
+       
 
         <!-- Search boxes -->
-        <div class="row light-green lighten-1">
+        <div class="row light-green darken-1">
             
-          <form>
+          <form id="headerSearch">
 
             <div class="col s3 searchDiv">
                 <span id="signedInAs"></span>
@@ -136,12 +141,12 @@
 
             <div class="col s12 m3 l3 input-field">
                     <input id="city" type="text">
-                    <label for="city">Location</label>
+                    <label for="city" class="white-text">City to Search</label>
             </div>
             
-            <div id="cuisineSearch" class="input-field col s12 m3">
-                <select id="drop-down">
-                    <option value="" selected>Add Cuisine</option>
+            <div id="cuisineSearch" class="input-field col s12 m3 ">
+                <select id="drop-down" >
+                    <option class="white-text" value="" selected >Add Cuisine</option>
                     <!-- <option value="1">defaut 1</option>
                     <option value="2">defaut 2</option>
                     <option value="3">defaut 3</option> -->
@@ -151,7 +156,7 @@
 
             <div class="col s12 m3 l3 input-field">
                 <input id="restaurant" type="text">
-                <label for="restaurant">Restaurant Name</label>
+                <label for="restaurant"class="white-text">Restaurant Name</label>
             </div>
 
             
@@ -274,7 +279,7 @@
             <div class="row" id="userNotes">
                  <div class="col s3">
                     <!-- Add Tab Modal Trigger -->
-                    <a id="modalBtnNotes" class="waves-effect waves-light btn modal-trigger pink"  href="#modalNotes"><i class="material-icons prefix">edit</i></a>
+                    <a id="modalBtnNotes" class ="btn-floating btn-small waves-effect waves-light right red"  href="#modalNotes" value="editNotes"><i class="material-icons prefix">edit</i></a>
                 </div>
                  <!-- Map Tab MODAL-->
                 <div id="modalNotes" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
