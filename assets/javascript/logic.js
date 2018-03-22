@@ -302,4 +302,3 @@ function capUpper(string){
     }
     return splitStr.join(' '); 
 };
-
