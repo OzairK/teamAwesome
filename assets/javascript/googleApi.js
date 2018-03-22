@@ -33,13 +33,16 @@ function initMap() {
         addRestaurantMarker(markers[i]);
         // console.log(markers[i]);
     }
-
+    
     // Add a new restaurant marker 
     function addRestaurantMarker(newMarker) {
         // console.log(newMarker);
         var marker = new google.maps.Marker({
             position: newMarker.coords,
             map: map,
+           // icon: "https://upload.wikimedia.org/wikipedia/en/2/24/SpongeBob_SquarePants_logo.svg"
+           //icon: "https://cdn3.iconfinder.com/data/icons/food-set-3/91/Food_C235-20.png"          // leaf
+           icon: "https://cdn3.iconfinder.com/data/icons/food-set-3/91/Food_C230-24.png"            // avacado image
         });
 
         // is there a specific icon to display? if so, set it. 
