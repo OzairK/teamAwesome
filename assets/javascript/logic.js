@@ -1,6 +1,3 @@
-// var initMapLat;
-// var initMapLng;
-
 $(document).ready(function () {
         // Search Dropdowm Menu: Materialize function call
         $('select').material_select();
@@ -33,11 +30,18 @@ initRest();
 function initRest(){
     console.log("working");
     cuisine_id=308;
-    entity_type="city";
+    entity_type="Dallas";
     city_id=277;
     generalSearch=true;
     initMapLat=parseFloat(29.760);
     initMapLng=parseFloat(-95.369);
+    if(city==="houston"){
+    initMapLat=parseFloat(29.760);
+    initMapLng=parseFloat(-95.369);
+    }
+    else {
+        alert("city is not houston");
+    }
     getRestuarants();
 };
 
@@ -136,6 +140,7 @@ function getCityInfo(callback){
         initMapLng=parseFloat(response.location_suggestions[0].longitude);
         entity_type=response.location_suggestions[0].entity_type;
         initMap();
+
         console.log(city_id, city_name, entity_type, initMapLat, initMapLng);
         callback();
     });
