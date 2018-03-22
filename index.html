@@ -21,6 +21,9 @@
     <!-- Site Style Overrides -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
+    <!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
  
 </head>
 
@@ -307,47 +310,43 @@
         
         </div>
 
-
+        <!--Firebase Test lab -->
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="txtEmail" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="txtPassword" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" id="btnLogin" name="action">Login
+                    <i class="material-icons right">send</i>
+                </button>
+                <button class="btn waves-effect waves-light" id="btnSignUp"  name="action">Sign Up
+                    <i class="material-icons right">create</i>
+                </button>
+                <button class="btn waves-effect waves-light" id="btnSignOut"  name="action">Sign Out
+                    <i class="material-icons right">directions_run</i>
+                </button>
+            </form>
+        </div>
 
 
         <!-- End of content -->
 
     </div>
 
-
-
-    <!--  FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAn3KaitMECF3eoP-jwVBPKxM2u1_MOWQM",
-            authDomain: "teamawesome-c4e37.firebaseapp.com",
-            databaseURL: "https://teamawesome-c4e37.firebaseio.com",
-            projectId: "teamawesome-c4e37",
-            storageBucket: "teamawesome-c4e37.appspot.com",
-            messagingSenderId: "426168129967"
-        };
-        firebase.initializeApp(config);
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
-
-    <!-- Leave out Storage -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
-
-<!-- END of FIREBASE -->
-
 <!-- JQUERY --> 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 <!-- MATERIALIZE -->    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-<!-- GOOGLE API -->
     
 
 <!-- Site Javascript Logic -->   
