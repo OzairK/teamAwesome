@@ -154,7 +154,6 @@ function getCityInfo(callback){
 };
 
 var queryUrlCuisines;
-var cuisine_id;
 var cuisine_name;
 var allCuisines=[]; //list of all cuisines and ids in obj
 // var allCuisines=[]; //list all cuisines in array
