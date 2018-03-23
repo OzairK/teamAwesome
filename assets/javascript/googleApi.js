@@ -50,7 +50,8 @@ function initMap() {
             default:
         }
     }
-        // console.log(markers); //keep this
+
+        console.log(markers);
 
 
     for (var i = 0; i < markers.length; i++) {
