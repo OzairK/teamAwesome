@@ -1,5 +1,6 @@
 // var initMapLat;
 // var initMapLng;
+var city = "Houston";
 
 $(document).ready(function () {
         // Search Dropdowm Menu: Materialize function call
@@ -38,6 +39,7 @@ function initRest(){
     generalSearch=true;
     initMapLat=parseFloat(29.760);
     initMapLng=parseFloat(-95.369);
+    getCityInfo();                              //oz
     getRestuarants();
 };
 
@@ -49,11 +51,13 @@ function initRest(){
 
 //after showing restuarants on map, click on one (input code) to get daily menu, restaurant info, and reviews
 //place to search a restaurant to also do this
-var city; //from user
+
 var cuisine; //from user
 var restName;
 var generalSearch;
 $("#searchIt").on("click", function (event){
+
+
     event.preventDefault();
     generalSearch=true;
     city=capUpper($("#city").val().trim());
@@ -108,6 +112,7 @@ $(document).on("click", ".tabs a", function(){
         formatAddress(getCity," ");
         getLatLng();
         initMap();
+        
     }
 })
 
