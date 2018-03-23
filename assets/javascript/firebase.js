@@ -37,7 +37,7 @@ btnLogin.addEventListener('click', e => {
     uid=auth.currentUser.uid;
     name=auth.currentUser.displayName;
     console.log(uid,name); //works
-    $("#hiUser").text("Hi" + name);
+    $("#hiUser").text("Hi " + name);
   });
 });
 
@@ -84,10 +84,10 @@ btnSignUp.addEventListener('click', e => {
 $("#btnSignOut").on("click", function(event){
     firebase.auth().signOut().then(function(){
         console.log("Sign out successful");
-        // uid=firebase.auth().currentUser.uid; //uid becomes null
-        // name=firebase.auth().currentUser.displayName; //becomes null
-        console.log(user.uid);
         $("#hiUser").empty();
+        uid=undefined;
+        name=undefined;
+        console.log(uid,name);
     }).catch(function(error){
         console.log("Error in signing out");
     });
@@ -100,6 +100,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     uid=user.uid;
     name=user.displayName;
     console.log(uid, name);
+    $("#hiUser").text("Hi " + name);
 } else {
     console.log('not logged in');
   }
@@ -147,12 +148,11 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     var userEmail = childSnapshot.val().email;
 });
 
-var key;
-
 $("#addTab").on("click", function(event){
     //to do:when add tab, add delete button to modal
     //to do:if delete btn clicked, delete fb info
-    uid=firebase.auth().currentUser.uid; //deleted var here
+    // console.log(uid);
+    uid=firebase.auth().currentUser.uid; 
     var tabName=$("#tabName").val().trim();
     var tabStreet=$("#tabStreet").val().trim();
     var tabCity=$("#tabCity").val().trim();
@@ -189,27 +189,35 @@ $("#addTab").on("click", function(event){
     };
 });
 
+//populates tabs from firebase info
+database.ref(uid).on("value", function(snapShot) {
+    var tabInfo=database.ref(uid).key;//uid
+    var chillins=snapShot.child(uid).val();//children of uid
 
-database.ref(uid).on("child_added", function(snapShot) {
-    // console.log(uid);
+    var t1=chillins.tab1;//values of tab1
+    var t2=chillins.tab2;
+    var t3=chillins.tab3;
+    console.log(t1, t2, t3);
+
     if (uid !== undefined){
-        $("#hiUser").text("Hi " + name);
-        uid=firebase.auth().currentUser.uid;
-        console.log(uid);
-        for (var i=1; i<4; i++){
-            var tabInfo=database.ref(uid).child("tab"+i).key;
-            var tabValue;
-            database.ref(uid).child("tab"+i).once("value", function(snap){
-                tabValue=snap.val();
-                console.log(tabValue);
-                if (typeof tabValue.tabName !== "undefined"){
-                    console.log(tabValue.tabName);
-                    var newTab=$("<li>").addClass("tab col s3");
-                    var newA=$("<a id="+tabValue.tabName+">").text(tabValue.tabName);
-                    newTab.append(newA);
-                    $(".tabs").append(newTab);
-                }
-            });
+        var tabInfo=database.ref(uid).key;
+        if (typeof t1 !== "boolean"){
+            var newTab=$("<li>").addClass("tab col s3");
+            var newA=$("<a id="+t1.tabName+">").text(t1.tabName);
+            newTab.append(newA);
+            $(".tabs").append(newTab);
+        }
+        if (typeof t2 !== "boolean"){
+            var newTab=$("<li>").addClass("tab col s3");
+            var newA=$("<a id="+t2.tabName+">").text(t2.tabName);
+            newTab.append(newA);
+            $(".tabs").append(newTab);
+        }
+        if (typeof t3 !== "boolean"){
+            var newTab=$("<li>").addClass("tab col s3");
+            var newA=$("<a id="+t3.tabName+">").text(t3.tabName);
+            newTab.append(newA);
+            $(".tabs").append(newTab);
         }
     }
 });

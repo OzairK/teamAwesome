@@ -111,6 +111,25 @@ if (this.id === "home"){
 }
 })
 
+$(document).on("click", ".tabs a", function(){
+    database.ref(uid).on("value",function(snapshot){
+        console.log(snapshot.val());
+    });
+    console.log(this.id);
+    if (this.id === "home"){
+        getAddress="7923 Annola";//change to user entered data
+        //getAddress=$("tabStreet");
+        getCity="Spring";//change to user entered data
+        //getCity=$("tabCity1;")
+        userZip="77379";//change to user entered data
+        // userZip=$("#tabZip");
+        formatAddress(getAddress, " ");
+        formatAddress(getCity," ");
+        getLatLng();
+        initMap();
+    }
+    })
+
 //need to give tabs in html, line 211 id with uer inputed name
 //change "Home" to above var
 //get user to input address
