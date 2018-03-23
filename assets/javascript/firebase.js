@@ -15,6 +15,9 @@ var btnLogin = document.getElementById('btnLogin');
 var btnSignUp = document.getElementById('btnSignUp');
 var btnLogOut = document.getElementById('btnLogOut');
 
+var uid; //get uid to create new node off root (1st level)
+var name; //get user's name
+
 //Add login event
 btnLogin.addEventListener('click', e => {
     e.preventDefault();
@@ -23,11 +26,12 @@ btnLogin.addEventListener('click', e => {
   var pass = txtPassword.value;
   var auth = firebase.auth();
   console.log(auth);
+  $("#hiUser").text("Hi" + name);
   var firebaseUser = auth.firebaseUser;
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
-  console.log('test');
+  uid=firebase.auth().currentUser.uid;
 });
 
 //Add SignUp event
@@ -37,33 +41,57 @@ btnSignUp.addEventListener('click', e => {
   e.preventDefault();
   var email = txtEmail.value;
   var pass = txtPassword.value;
+  name=txtName.value;
+  $("#hiUser").text("Hi " + name);
   var auth = firebase.auth();
   //Sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+  //if error message above, stop code below!!!!
+  promise.then(function(){
+    var user = firebase.auth().currentUser;
+    console.log(user);
+    console.log(user,uid);
+    if (user != null){
+        console.log(user.uid);
+        uid=user.uid;
+        database.ref(uid).set({
+            name:name,
+            tab1:false,
+            tab2:false,
+            tab3:false
+        });
+        console.log(uid);
+    }; 
+  });
   $("#loginForm")[0].reset();
 });
 
 $("#btnSignOut").on("click", function(event){
     firebase.auth().signOut().then(function(){
         console.log("Sign out successful");
+        uid="";
+        name="";
+        $("#hiUser").text("");
     }).catch(function(error){
         console.log("Error in signing out");
     });
-});
+    $("#loginForm")[0].reset();
 
+    //to do: when sign out, clear all data
+});
 
 //I think this function and the following on do the same thing...delete this one???
 //Realtime user test
 firebase.auth().onAuthStateChanged(function(observer) {
         window.observer = observer; // user is undefined if no user signed in
-        console.log(observer);
+        // console.log(observer);
        });
 
 //Add a realtime listener
 firebase.auth().onAuthStateChanged(function(firebaseUser) {
   if (firebaseUser) {
-    console.log(firebaseUser);
+    // console.log(firebaseUser);
   } else {
     console.log('not logged in');
   }
@@ -113,97 +141,67 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 var key;
 
-
 $("#addTab").on("click", function(event){
-    //if first time to add tab...
-    database.ref().once("value", function(snapshot){
-        snapshot.forEach(function(childsnap){
-
-            //if there's not a tabs, create it
-            //if tabs <4 push info
-            //else modal with "You've reached the max tabs. Delete one first before adding another."
-            //when add tab, add delete button to modal
-            //if delete btn clicked, delete fb info
-
-
-            // if (childsnap.key!==="tabs"){
-                
-            // }      
-        });
-
-    });
-
-    console.log(event);
-    //make var to store info from form
-    // var tabNum=$('input[type="radio"]:checked').attr("id");
+    //to do:when add tab, add delete button to modal
+    //to do:if delete btn clicked, delete fb info
+    var uid=firebase.auth().currentUser.uid;
     var tabName=$("#tabName").val().trim();
     var tabStreet=$("#tabStreet").val().trim();
     var tabCity=$("#tabCity").val().trim();
     var tabZip=$("#tabZip").val().trim();
     console.log(tabName,tabStreet,tabCity,tabZip);
-    console.log(key);
+    console.log(key,uid);//uid
 
-    // if(tabStreet!=""&&tabStreet!=""&&tabCity!=""&&tabZip!=""){
-    // if database.ref("tabs") doesn't exist push
-    // if it does, update it 
-        database.ref("tabs").push({
-            tabName:capUpper(tabName),
-            tabStreet:capUpper(tabStreet),
-            tabCity:capUpper(tabCity),
-            tabZip:tabZip,
+    //make sure all info is included
+    if(tabStreet!=""&&tabStreet!=""&&tabCity!=""&&tabZip!=""){
+        // cycle through all tabs
+        label: for (var i=1; i<4; i++){
+            var tabInfo=database.ref(uid).child("tab"+i).key;
+            var tabValue;
+            database.ref(uid).child("tab"+i).once("value", function(snap){
+                tabValue=snap.val();
+                console.log(tabValue);
+            });
+            //if there's an empty (false) tab, push the data
+            if (tabValue === false){
+                database.ref(uid).child(tabInfo).update({
+                    tabName:capUpper(tabName),
+                    tabStreet:capUpper(tabStreet),
+                    tabCity:capUpper(tabCity),
+                    tabZip:tabZip,
+                });
+                break label;
+            } 
+            //to do:else modal below with "You've reached the max tabs. Delete one first before adding another."
+            // else {console.log("You've reached the max tabs. Delete one first before adding another.")}   
+        }
+    }
+    else {
+        console.log("error message - need more info");
+    };
+});
+
+
+database.ref(uid).on("child_added", function(snapShot) {
+    $("#hiUser").text("Hi " + name);
+    var uid=firebase.auth().currentUser.uid;
+    console.log(uid);
+    for (var i=1; i<4; i++){
+        var tabInfo=database.ref(uid).child("tab"+i).key;
+        var tabValue;
+        database.ref(uid).child("tab"+i).once("value", function(snap){
+            tabValue=snap.val();
+            console.log(tabValue);
+            if (typeof tabValue.tabName !== "undefined"){
+                console.log(tabValue.tabName);
+                var newTab=$("<li>").addClass("tab col s3");
+                var newA=$("<a id="+tabValue.tabName+">").text(tabValue.tabName);
+                newTab.append(newA);
+                $(".tabs").append(newTab);
+            }
         });
-    // };
+    }
 });
-
-
-database.ref().on("child_added", function(snapShot) {
-    snapShot.forEach(function(childSnap){
-        console.log(snapShot.key);
-        console.log(snapShot.val());
-        console.log(childSnap.key);
-        var data=childSnap.val();
-        console.log(data);
-
-        var newTab=$("<li>").addClass("tab col s3");
-        var newA=$("<a id="+data.tabName+">").text(data.tabName);
-        newTab.append(newA);
-        $(".tabs").append(newTab);
-
-    })
-    // console.log(snapShot.key); //= tabs
-    // console.log(snapShot.val());//info from tabs
-    // if (snapShot.val()){
-    //     var data=snapShot.val();
-    //     console.log(data, data.tabName);
-
-    //     console.log(snapShot.val());
-    //     var newList=$("<li>").addClass("tab col s3");
-    //     var newA=$("<a>").addClass("active");
-    //     newList.append(newA);
-
-    //     var newTab=$("<li>").text("name"); //add id and name
-    //     newTab.addClass("tab col s3");
-    //     $(".tabs").append(newTab);
-    // };
-
-    key=snapShot.key;     
-});
-
-//     switch (tabNum){
-//         case "tab1":
-//             console.log("tab1");
-//             $("#tab1Name").text(tabName).attr("key", key);
-//             break;
-//         case "tab2":
-//             console.log("tab2");
-//             $("#tab2Name").text(tabName).attr("key", key);
-//             break;
-//         case "tab3":
-//             console.log("tab3");
-//             $("#tab3Name").text(tabName).attr("key", key);
-//     };
-
-// });
 
 //when app opens, assign tab ids from firebase
 //if tab has info, .update instead of push
