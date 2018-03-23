@@ -50,6 +50,7 @@ function initMap() {
             default:
         }
     }
+
         console.log(markers);
 
 
@@ -121,21 +122,25 @@ function formatAddress(string, separator){
     if (string===getAddress){
         userAddress=string.split(separator);
         userAddress=userAddress.join("+");
-        // console.log(userAddress);
+        console.log(userAddress);
     }
     else{
         userCity=string.split(separator).join("+");
-        // console.log(userCity);
+        console.log(userCity);
     }
 };
 
 //ajax call to get latitude and longitude from user address
 function getLatLng(){
-    queryUrlLatLng="https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+",+"+userCity+",+"+userZip+"&key=AIzaSyBiHE2gWj3PGXzJKZ0DIF7203J7b90-mhY";
+    queryUrlLatLng="https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+",+"+userCity+",+"+userZip+"&key=AIzaSyCwhOakfPVFjGYSWZ9KwaM8EH9lqw5cY1A";
+    //above key is from kris, links to script tag at bottom of html
+
+    console.log(queryUrlLatLng);
     $.ajax({
         url:queryUrlLatLng,
         method:"GET"
     }).then(function(response){
+        console.log(response);
         initMapLat=response.results[0].geometry.location.lat;
         initMapLng=response.results[0].geometry.location.lng;
         initMap();

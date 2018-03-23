@@ -31,14 +31,13 @@ initRest();
 
 //populate initial map with veggie restaurants
 function initRest(){
-// console.log("working");
-cuisine_id=308;
-entity_type="city";
-city_id=277;
-generalSearch=true;
-initMapLat=parseFloat(29.760);
-initMapLng=parseFloat(-95.369);
-getRestaurants();
+    cuisine_id=308;
+    entity_type="city";
+    city_id=277;
+    generalSearch=true;
+    initMapLat=parseFloat(29.760);
+    initMapLng=parseFloat(-95.369);
+    getRestaurants();
 };
 
 //get location coordinates
@@ -67,12 +66,6 @@ else {
     generalSearch=false; 
 };
 console.log(generalSearch, restName);
-//validate that city has been entered before finding cuisines and/or restaurant
-// if (city===""){
-//     // alert("enter city");
-//     console.log(city);
-// }
-// else {
     city=capUpper($("#city").val().trim());
     if (generalSearch){
         getCityInfo(function(){
@@ -84,55 +77,60 @@ console.log(generalSearch, restName);
             getSpecificRest();
         })
     };
-// };
 });
 
 $(document).on("click", ".cuisineOptionBox", function(){
-event.preventDefault();
-var c=$(this).val();
-cuisine_id="308%2C%20"+c;
-console.log(this);
-getRestaurants();
+    event.preventDefault();
+    var c=$(this).val();
+    cuisine_id="308%2C%20"+c;
+    console.log(this);
+    getRestaurants();
 });
 
 $(document).on("click", ".tabs a", function(){
-console.log(this.id);
-if (this.id === "home"){
-    getAddress="7923 Annola";//change to user entered data
-    //getAddress=$("tabStreet");
-    getCity="Spring";//change to user entered data
-    //getCity=$("tabCity1;")
-    userZip="77379";//change to user entered data
-    // userZip=$("#tabZip");
-    formatAddress(getAddress, " ");
-    formatAddress(getCity," ");
-    getLatLng();
-    initMap();
-}
-})
-
-$(document).on("click", ".tabs a", function(){
     database.ref(uid).on("value",function(snapshot){
-        console.log(snapshot.val());
+        console.log(snapshot.val());//data inside uid
+        tab1=snapshot.val().tab1;
+        tab2=snapshot.val().tab2;
+        tab3=snapshot.val().tab3;
     });
-    console.log(this.id);
-    if (this.id === "home"){
-        getAddress="7923 Annola";//change to user entered data
-        //getAddress=$("tabStreet");
-        getCity="Spring";//change to user entered data
-        //getCity=$("tabCity1;")
-        userZip="77379";//change to user entered data
-        // userZip=$("#tabZip");
+    console.log(this.id);//the name of the tab
+    console.log(this);
+    //below isn't dry but it won't work in a loop
+    if (this.id === "tab1"){
+        console.log(tab1.tabName);
+        getAddress=tab1.tabStreet;
+        getCity=tab1.tabCity;
+        userZip=tab1.tabZip;
+        console.log(getAddress, getCity, userZip);
+        formatAddress(getAddress, " ");
+        formatAddress(getCity," ");
+        getLatLng();
+        initMap();
+        }
+    if (this.id === "tab2"){
+        console.log(tab2.tabName);
+        getAddress=tab2.tabStreet;
+        getCity=tab2.tabCity;
+        userZip=tab2.tabZip;
+        console.log(getAddress, getCity, userZip);
+        formatAddress(getAddress, " ");
+        formatAddress(getCity," ");
+        getLatLng();
+        initMap();
+    }
+    if (this.id === "tab3"){
+        console.log(tab3.tabName);
+        getAddress=tab3.tabStreet;
+        getCity=tab3.tabCity;
+        userZip=tab3.tabZip;
+        console.log(getAddress, getCity, userZip);
         formatAddress(getAddress, " ");
         formatAddress(getCity," ");
         getLatLng();
         initMap();
     }
     })
-
-//need to give tabs in html, line 211 id with uer inputed name
-//change "Home" to above var
-//get user to input address
 
 var queryUrlLocation;
 var city_id;
@@ -191,13 +189,6 @@ $.ajax({
         $(".select-dropdown").append(cuisineOption);
     };
     console.log(allCuisines);
-
-    // console.log(allCuisines); //object of names and ids
-    // $("#cuisines-list").append("<strong>List of all cuisines for " + city_name + " : </strong><br>");
-    // for (var j=0; j<allCuisines.length; j++){
-    //     $("#cuisines-list").append(allCuisines[j].name + " - ");
-    // }; //delete later
-    // callback();
 });
 };
 
@@ -213,13 +204,13 @@ queryUrlRestaurants="https://developers.zomato.com/api/v2.1/search?entity_id=" +
 
 
 // console.log(queryUrlRestaurants);
-console.log(cuisine_id, entity_type, city_id);
+// console.log(cuisine_id, entity_type, city_id); //keep this
 $.ajax({
     url:queryUrlRestaurants,
     method:"GET",
     headers: {"user-key": apiKey} //api key
 }).then(function(response) {
-    console.log(response.restaurants); //lists 20 restaurants
+    // console.log(response.restaurants); //lists 20 restaurants //keep this
     for (var j=0; j<response.restaurants.length; j++){
         var r=response.restaurants[j].restaurant;
         var rl=r.location;
@@ -306,12 +297,11 @@ $.ajax({
 });
 };
 
-// $("#form")[0].reset();
-
 function capUpper(string){
-var splitStr = string.toLowerCase().split(' ');
-for (var i = 0; i < splitStr.length; i++) {
-    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-}
-return splitStr.join(' '); 
+    var splitStr = string.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' '); 
+    console.log(string);
 };
