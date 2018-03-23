@@ -23,7 +23,15 @@ $(document).ready(function () {
     $("#modalBtnNotes").click(function () {
         $("#modalNotes").modal();
     });
+    
 });
+
+//var elem = document.querySelector('.fixed-action-btn');
+//var instance = M.FloatingActionButton.init(elem, {
+//  direction: 'left'
+//});
+
+
 
 var apiKey="134929701576f37675a021f1de544eed";
 

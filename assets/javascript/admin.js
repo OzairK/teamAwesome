@@ -13,35 +13,14 @@
   //----------------------------------------------------------
   var database = firebase.database();
 
-
   // event-listener:  get user form data
-  $('#addItem').on('click', function(){
+  //$('#addItem').on('click', function(){
 
     // Prevent the page from reloading
-    event.preventDefault();
+    //event.preventDefault();
 
-    // Get user data from form
-    var name = $('#restaurantName').val().trim();
-    var desc = $('#description').val().trim();
-    var secret = $('#secretItem').val();
-    var menu= $('#menuItem').val();
-
-    //if all data fields are filled in then push user data to database
-   // if (name != "" && desc != "" && (secret != "" || menu != ""){  
-    if (name != "" && desc != "") {      
-      database.ref().push({   
-        itemName: name,
-        itemDesc: desc,
-        itemSecret: secret,
-        itemMenu: menu
-      });
-
-      // clear form fields from screen
-      $("form")[0].reset();
-
-      alert(name + " successfully added");
-    }
-  });
+    
+   
 
   // listen for database post - when it occurs take snapshot of new data posted and add data to html db.ref().on("child_added", function (snapshot) {        		
   database.ref().on("child_added", function(childSnapshot){
@@ -51,19 +30,17 @@
 
       // call child data = data......this is new item data from database
       var data = childSnapshot.val();
-    
-      
-      
 
       // generate parts of new item data ....new table row
-      var newTrTrain = $('<tr>');
-      var newTdName = $('<td>').text(data.itemName);
-      var newTdDest = $('<td>').text(data.itemDest);
-      var newTdSecret = $('<td>').text(data.itemSecret);
-      var newTdMenu = $('<td>').text(itemMenu);
+      var newTrItem = $('<tr>');
+      var newTdName = $('<td>').text(data.SIitemRest);
+      var newTdDesc = $('<td>').text(data.SIitemDesc);
+
+      var newTdItem = $('<td>').text(data.SIitemType);
+      
 
       // add table cells(<td> tags) to table row (<tr> tab)
-      newTrItem.append(newTdName, newTdDesc, newTdSecret, newTdMenu,);
+      newTrItem.append(newTdName, newTdDesc, newTdItem);
     
       // now Write html to page appending it to tbody tag
       $('tbody').append(newTrItem);

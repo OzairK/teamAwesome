@@ -88,3 +88,6 @@ div#notes.row.pink{
 .tabs :hover{
     background-color:#9ccc66;
 }
+#modalBtnNotes{
+    margin-top: -25px;
+}
