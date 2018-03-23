@@ -17,6 +17,7 @@ var btnLogOut = document.getElementById('btnLogOut');
 
 var uid; //get uid to create new node off root (1st level)
 var name; //get user's name
+console.log(uid, name);
 
 //Add login event
 btnLogin.addEventListener('click', e => {
@@ -26,12 +27,18 @@ btnLogin.addEventListener('click', e => {
   var pass = txtPassword.value;
   var auth = firebase.auth();
   console.log(auth);
-  $("#hiUser").text("Hi" + name);
-  var firebaseUser = auth.firebaseUser;
+
   //Sign in
   var promise = auth.signInWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
-  uid=firebase.auth().currentUser.uid;
+  promise.catch(e => console.log(e.message)); //need to fix this so below code won't run if the promise.catch returns error message
+
+  //promise.then waits for sign in to happen before getting the uid
+  promise.then(function(){
+    uid=auth.currentUser.uid;
+    name=auth.currentUser.displayName;
+    console.log(uid,name); //works
+    $("#hiUser").text("Hi" + name);
+  });
 });
 
 //Add SignUp event
@@ -41,27 +48,34 @@ btnSignUp.addEventListener('click', e => {
   e.preventDefault();
   var email = txtEmail.value;
   var pass = txtPassword.value;
-  name=txtName.value;
+  var name = txtName.value;//get name from form
   $("#hiUser").text("Hi " + name);
+  console.log(name);
   var auth = firebase.auth();
   //Sign in
-  var promise = auth.createUserWithEmailAndPassword(email, pass);
+  var promise = auth.createUserWithEmailAndPassword(email, pass)
   promise.catch(e => console.log(e.message));
   //if error message above, stop code below!!!!
   promise.then(function(){
     var user = firebase.auth().currentUser;
-    console.log(user);
     console.log(user,uid);
     if (user != null){
         console.log(user.uid);
         uid=user.uid;
         database.ref(uid).set({
-            name:name,
+            name:name, //maybe delete later
             tab1:false,
             tab2:false,
             tab3:false
         });
-        console.log(uid);
+        user.updateProfile({
+            displayName:name
+        }).then(function(){
+            name=user.displayName;
+        }, function(error){
+            console.log("error");
+        })
+        console.log(uid, name);
     }; 
   });
   $("#loginForm")[0].reset();
@@ -70,29 +84,23 @@ btnSignUp.addEventListener('click', e => {
 $("#btnSignOut").on("click", function(event){
     firebase.auth().signOut().then(function(){
         console.log("Sign out successful");
-        uid="";
-        name="";
-        $("#hiUser").text("");
+        // uid=firebase.auth().currentUser.uid; //uid becomes null
+        // name=firebase.auth().currentUser.displayName; //becomes null
+        console.log(user.uid);
+        $("#hiUser").empty();
     }).catch(function(error){
         console.log("Error in signing out");
     });
     $("#loginForm")[0].reset();
-
-    //to do: when sign out, clear all data
 });
 
-//I think this function and the following on do the same thing...delete this one???
-//Realtime user test
-firebase.auth().onAuthStateChanged(function(observer) {
-        window.observer = observer; // user is undefined if no user signed in
-        // console.log(observer);
-       });
-
-//Add a realtime listener
-firebase.auth().onAuthStateChanged(function(firebaseUser) {
-  if (firebaseUser) {
-    // console.log(firebaseUser);
-  } else {
+//Add a realtime listener -- this works!!
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user!=null) {
+    uid=user.uid;
+    name=user.displayName;
+    console.log(uid, name);
+} else {
     console.log('not logged in');
   }
 });
@@ -144,13 +152,13 @@ var key;
 $("#addTab").on("click", function(event){
     //to do:when add tab, add delete button to modal
     //to do:if delete btn clicked, delete fb info
-    var uid=firebase.auth().currentUser.uid;
+    uid=firebase.auth().currentUser.uid; //deleted var here
     var tabName=$("#tabName").val().trim();
     var tabStreet=$("#tabStreet").val().trim();
     var tabCity=$("#tabCity").val().trim();
     var tabZip=$("#tabZip").val().trim();
     console.log(tabName,tabStreet,tabCity,tabZip);
-    console.log(key,uid);//uid
+    console.log(uid);//uid
 
     //make sure all info is included
     if(tabStreet!=""&&tabStreet!=""&&tabCity!=""&&tabZip!=""){
@@ -183,23 +191,26 @@ $("#addTab").on("click", function(event){
 
 
 database.ref(uid).on("child_added", function(snapShot) {
-    $("#hiUser").text("Hi " + name);
-    var uid=firebase.auth().currentUser.uid;
-    console.log(uid);
-    for (var i=1; i<4; i++){
-        var tabInfo=database.ref(uid).child("tab"+i).key;
-        var tabValue;
-        database.ref(uid).child("tab"+i).once("value", function(snap){
-            tabValue=snap.val();
-            console.log(tabValue);
-            if (typeof tabValue.tabName !== "undefined"){
-                console.log(tabValue.tabName);
-                var newTab=$("<li>").addClass("tab col s3");
-                var newA=$("<a id="+tabValue.tabName+">").text(tabValue.tabName);
-                newTab.append(newA);
-                $(".tabs").append(newTab);
-            }
-        });
+    // console.log(uid);
+    if (uid !== undefined){
+        $("#hiUser").text("Hi " + name);
+        uid=firebase.auth().currentUser.uid;
+        console.log(uid);
+        for (var i=1; i<4; i++){
+            var tabInfo=database.ref(uid).child("tab"+i).key;
+            var tabValue;
+            database.ref(uid).child("tab"+i).once("value", function(snap){
+                tabValue=snap.val();
+                console.log(tabValue);
+                if (typeof tabValue.tabName !== "undefined"){
+                    console.log(tabValue.tabName);
+                    var newTab=$("<li>").addClass("tab col s3");
+                    var newA=$("<a id="+tabValue.tabName+">").text(tabValue.tabName);
+                    newTab.append(newA);
+                    $(".tabs").append(newTab);
+                }
+            });
+        }
     }
 });
 
