@@ -17,7 +17,7 @@ var btnLogOut = document.getElementById('btnLogOut');
 
 var uid; //get uid to create new node off root (1st level)
 var name; //get user's name
-console.log(uid, name);
+// console.log(uid, name);
 
 //Add login event
 btnLogin.addEventListener('click', e => {
@@ -99,8 +99,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user!=null) {
     uid=user.uid;
     name=user.displayName;
-    console.log(uid, name);
+    // console.log(uid, name);
     $("#hiUser").text("Hi " + name);
+    //needs to detect user sign in and update page
 } else {
     console.log('not logged in');
   }
@@ -178,6 +179,7 @@ $("#addTab").on("click", function(event){
                     tabCity:capUpper(tabCity),
                     tabZip:tabZip,
                 });
+                console.log(tabName);
                 break label;
             } 
             //to do:else modal below with "You've reached the max tabs. Delete one first before adding another."
@@ -187,35 +189,36 @@ $("#addTab").on("click", function(event){
     else {
         console.log("error message - need more info");
     };
+    $("#mapTabs")[0].reset();
+
 });
 
 //populates tabs from firebase info
 database.ref(uid).on("value", function(snapShot) {
     var tabInfo=database.ref(uid).key;//uid
     var chillins=snapShot.child(uid).val();//children of uid
-
-    var t1=chillins.tab1;//values of tab1
-    var t2=chillins.tab2;
-    var t3=chillins.tab3;
-    console.log(t1, t2, t3);
+    // console.log(t1, t2, t3); //keep this
 
     if (uid !== undefined){
+        var t1=chillins.tab1;//values of tab1
+        var t2=chillins.tab2;
+        var t3=chillins.tab3;
         var tabInfo=database.ref(uid).key;
         if (typeof t1 !== "boolean"){
             var newTab=$("<li>").addClass("tab col s3");
-            var newA=$("<a id="+t1.tabName+">").text(t1.tabName);
+            var newA=$("<a id=tab1>").text(t1.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);
         }
         if (typeof t2 !== "boolean"){
             var newTab=$("<li>").addClass("tab col s3");
-            var newA=$("<a id="+t2.tabName+">").text(t2.tabName);
+            var newA=$("<a id=tab2>").text(t2.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);
         }
         if (typeof t3 !== "boolean"){
             var newTab=$("<li>").addClass("tab col s3");
-            var newA=$("<a id="+t3.tabName+">").text(t3.tabName);
+            var newA=$("<a id=tab3>").text(t3.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);
         }
