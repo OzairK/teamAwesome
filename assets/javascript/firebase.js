@@ -1,13 +1,13 @@
-  // Initialize Firebase
-  var config = {
+// Initialize Firebase
+var config = {
     apiKey: "AIzaSyCwhOakfPVFjGYSWZ9KwaM8EH9lqw5cY1A",
     authDomain: "teamawesome-f39d7.firebaseapp.com",
     databaseURL: "https://teamawesome-f39d7.firebaseio.com",
     projectId: "teamawesome-f39d7",
     storageBucket: "",
     messagingSenderId: "539466789478"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
 var txtEmail = document.getElementById('txtEmail');
 var txtPassword = document.getElementById('txtPassword');
@@ -41,8 +41,19 @@ btnSignUp.addEventListener('click', e => {
   //Sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
+  $("#loginForm")[0].reset();
 });
 
+$("#btnSignOut").on("click", function(event){
+    firebase.auth().signOut().then(function(){
+        console.log("Sign out successful");
+    }).catch(function(error){
+        console.log("Error in signing out");
+    });
+});
+
+
+//I think this function and the following on do the same thing...delete this one???
 //Realtime user test
 firebase.auth().onAuthStateChanged(function(observer) {
         window.observer = observer; // user is undefined if no user signed in
@@ -50,7 +61,7 @@ firebase.auth().onAuthStateChanged(function(observer) {
        });
 
 //Add a realtime listener
-firebase.auth().onAuthStateChanged(firebaseUser => {
+firebase.auth().onAuthStateChanged(function(firebaseUser) {
   if (firebaseUser) {
     console.log(firebaseUser);
   } else {
@@ -60,6 +71,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 var database = firebase.database();
 
+//do we need this?????
 $("#submitUser").on("click", function(event) {
     event.preventDefault();
 
@@ -90,6 +102,7 @@ $("#submitUser").on("click", function(event) {
 
 });
 
+//do we need this???????
 //Create an event in database when user is added
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {   
     var fName = childSnapshot.val().firstName;
@@ -98,15 +111,8 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     var userEmail = childSnapshot.val().email;
 });
 
-//commented out below so I can keep using this file...
-// firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // ...
-//   });
-
 var key;
+
 
 $("#addTab").on("click", function(event){
     //if first time to add tab...
