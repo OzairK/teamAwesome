@@ -33,12 +33,23 @@ input#restaurant{
     color: white;
     border-bottom: white 1px solid;
 }
-#txtEmail, #txtPassword { font-size:0.5rem;
-    max-width:100px;
-    padding-bottom:10px;
-    padding-top:0px;
-    background-color: #aed581; 
-    border: none;
+#txtEmailLogin, #txtPasswordLogin  { font-size:0.5rem;
+    border-bottom: white 1px solid;
+    color: white;   
+}
+#txtForgotEmail, #pwForm {
+    border-bottom: white 1px solid;
+    color: white; 
+}
+#modal1, #modal2, #modalTabs {
+    color: white;
+     background-color: #aed581;
+}
+.modal-footer{
+    color: #66bb6a;
+}
+#txtForgotEmail {
+    color: white;
 }
 
 #modalBtn {font-size:.7rem;}
@@ -63,34 +74,44 @@ p#hiUser{ padding-top:20px;
 .searchDiv{
     margin-top:20px;
 }
-label {
+/* label {
     color: black;
-}
+} */
 
 #zomatoAPI{
-    padding-left:25px;
+    /* padding-left:25px; */
     /*text-align: center;*/
 }
 div#photo.row{
-    min-height:150px;
-
+    /* min-height:150px; */
+    background-color: #7DB249;
+    max-width: 287px;
+}
+#restaurant-photo {
+    width: 287px;
+    height: 253px;
 }
 .restaurantImage{
-    max-width: 300px;
+    max-width: 287px;
 }
 div#listingDetails.row{
     min-height:150px;
-    background-color: lightpink;
+    background-color: #AFD485;
 }
 #restaurants-big{
     min-height:50px;
     font-size: 1.5em;
 }
-div#notes.row.pink{
+div#notes.row{
     min-height:150px;
+    background-color: #7db249;
 }
 #restaurant-info{
     
+}
+#modalBtnTab {
+    font-size: 1.5em;
+    color: #f2453d;
 }
 .tabs{
     background-color:#aed581;
@@ -104,7 +125,8 @@ div#notes.row.pink{
 #modalBtnNotes{
     margin-top: -25px;
 }
-#btnLogin {
-    margin-top: 18px;
+#btnLogin, #btnLogOut {
+    margin-top: 16px;
     color: white;
+    font-size:10px;
 }
