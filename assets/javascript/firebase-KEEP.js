@@ -11,11 +11,10 @@ firebase.initializeApp(config);
 
 var txtEmail = document.getElementById('txtEmail');
 var txtPassword = document.getElementById('txtPassword');
-var txtEmailLogin = document.getElementById('txtEmail');
-var txtPasswordLogin = document.getElementById('txtPassword');
 var btnLogin = document.getElementById('btnLogin');
 var btnSignUp = document.getElementById('btnSignUp');
 var btnLogOut = document.getElementById('btnLogOut');
+//add button get password
 
 var uid; //get uid to create new node off root (1st level)
 var name; //get user's name
@@ -25,39 +24,22 @@ var name; //get user's name
 btnLogin.addEventListener('click', e => {
     e.preventDefault();
   //Get email and password
-  var email = txtEmailLogin.value;
-  var password = txtPasswordLogin.value;
+  var email = txtEmail.value;
+  var pass = txtPassword.value;
+  var auth = firebase.auth();
+  console.log(auth);
 
-  //Sign In
-  var promise = firebase.auth().signInWithEmailAndPassword(email, password)
-  promise.catch(e => console.log(e.message));
+  //Sign in
+  var promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch(e => console.log(e.message)); //need to fix this so below code won't run if the promise.catch returns error message
+
+  //promise.then waits for sign in to happen before getting the uid
   promise.then(function(){
-      console.log(firebase.auth().currentUser);
+    uid=auth.currentUser.uid;
+    name=auth.currentUser.displayName;
+    console.log(uid,name); //works
+    $("#hiUser").text("Hi " + name);
   });
-  //if error message above, stop code below!!!!
-//   promise.then(function(){
-//     var user = firebase.auth().currentUser;
-//     console.log(user,uid);
-//     if (user != null){
-//         console.log(user.uid);
-//         uid=user.uid;
-//         database.ref(uid).set({
-//             name:name, //maybe delete later
-//             tab1:false,
-//             tab2:false,
-//             tab3:false
-//         });
-//         user.updateProfile({
-//             displayName:name
-//         }).then(function(){
-//             name=user.displayName;
-//         }, function(error){
-//             console.log("error");
-//         });
-//         console.log(uid, name);
-//     }
-//   });
-  $("#loginForm")[0].reset();
 });
 
 //Add SignUp event
@@ -71,7 +53,7 @@ btnSignUp.addEventListener('click', e => {
   $("#hiUser").text("Hi " + name);
   console.log(name);
   var auth = firebase.auth();
-  //Sign Up
+  //Sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass)
   promise.catch(e => console.log(e.message));
   //if error message above, stop code below!!!!
@@ -93,15 +75,14 @@ btnSignUp.addEventListener('click', e => {
             name=user.displayName;
         }, function(error){
             console.log("error");
-        });
+        })
         console.log(uid, name);
-    }
+    }; 
   });
   $("#loginForm")[0].reset();
-
 });
 
-$("#btnLogOut").on("click", function(event){
+$("#btnSignOut").on("click", function(event){
     firebase.auth().signOut().then(function(){
         console.log("Sign out successful");
         $("#hiUser").empty();
@@ -132,6 +113,45 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 var database = firebase.database();
 
+//do we need this?????
+$("#submitUser").on("click", function(event) {
+    event.preventDefault();
+
+    //Grabs user input from the form on the page
+    var fName = $("#first_name").val().trim();
+    var lName = $("#last_name").val().trim();
+    var userPassword = $("#password").val().trim();
+    console.log(userPassword);
+    var userEmail = $("#email").val().trim();
+
+    //Create local "temporary" object for user data
+    var newUser = {
+        firstName: fName,
+        lastName: lName,
+        password: userPassword,
+        email: userEmail
+    };
+
+    //Upload user information to database
+    database.ref().push(newUser);
+    console.log(newUser);
+    
+    //Clears the text boxes
+    $("#first_name").val("");
+    $("#last_name").val("");
+    $("#password").val("");
+    $("#email").val("");
+
+});
+
+//do we need this???????
+//Create an event in database when user is added
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {   
+    var fName = childSnapshot.val().firstName;
+    var lName = childSnapshot.val().lastName;
+    var userPassword = childSnapshot.val().password;
+    var userEmail = childSnapshot.val().email;
+});
 
 $("#addTab").on("click", function(event){
     //to do:when add tab, add delete button to modal
