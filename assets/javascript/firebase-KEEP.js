@@ -50,7 +50,7 @@ btnSignUp.addEventListener('click', e => {
   var email = txtEmail.value;
   var pass = txtPassword.value;
   var name = txtName.value;//get name from form
-  $("#hiUser").text("Hi " + name);
+//   $("#hiUser").text("Hi " + name);
   console.log(name);
   var auth = firebase.auth();
   //Sign in
@@ -60,6 +60,7 @@ btnSignUp.addEventListener('click', e => {
   promise.then(function(){
     var user = firebase.auth().currentUser;
     console.log(user,uid);
+    name=user.uid;
     if (user != null){
         console.log(user.uid);
         uid=user.uid;
@@ -76,9 +77,11 @@ btnSignUp.addEventListener('click', e => {
         }, function(error){
             console.log("error");
         })
-        console.log(uid, name);
+        console.log(uid, name, user.displayName);
+        //user.displayName=null; why???
     }; 
   });
+  $("#hiUser").text("Hi " + name);
   $("#loginForm")[0].reset();
 });
 
@@ -100,7 +103,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user!=null) {
     uid=user.uid;
     name=user.displayName;
-    // console.log(uid, name);
+    console.log(uid, name);
     $("#hiUser").text("Hi " + name);
     //needs to detect user sign in and update page
     
