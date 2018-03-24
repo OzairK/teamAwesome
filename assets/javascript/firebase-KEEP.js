@@ -14,6 +14,7 @@ var txtPassword = document.getElementById('txtPassword');
 var btnLogin = document.getElementById('btnLogin');
 var btnSignUp = document.getElementById('btnSignUp');
 var btnLogOut = document.getElementById('btnLogOut');
+//add button get password
 
 var uid; //get uid to create new node off root (1st level)
 var name; //get user's name
