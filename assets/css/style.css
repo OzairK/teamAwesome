@@ -33,6 +33,20 @@ input#restaurant{
     color: white;
     border-bottom: white 1px solid;
 }
+#txtEmail, #txtPassword { font-size:0.5rem;
+    max-width:100px;
+    padding-bottom:10px;
+    padding-top:0px;
+    background-color: #aed581; 
+    border: none;
+}
+
+#modalBtn {font-size:.7rem;}
+#modalBtn2 {font-size:.7rem;}
+
+p#hiUser{ padding-top:20px;
+    font-size:1.1rem;}
+
 .waves-effect.waves-blue{
     /* The alpha value allows the text and background color
     of the button to still show through. */
@@ -59,11 +73,10 @@ label {
 }
 div#photo.row{
     min-height:150px;
-    background-color:lightgray;
+
 }
 .restaurantImage{
     max-width: 300px;
-    margin-left:20px;
 }
 div#listingDetails.row{
     min-height:150px;
@@ -90,4 +103,8 @@ div#notes.row.pink{
 }
 #modalBtnNotes{
     margin-top: -25px;
+}
+#btnLogin {
+    margin-top: 18px;
+    color: white;
 }
