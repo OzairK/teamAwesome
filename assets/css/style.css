@@ -33,7 +33,7 @@ input#restaurant{
     color: white;
     border-bottom: white 1px solid;
 }
-#txtEmail, #txtPassword { font-size:0.5rem;
+#txtEmail, #txtPassword { font-size:1rem;
     max-width:100px;
     padding-bottom:10px;
     padding-top:0px;
@@ -69,6 +69,7 @@ label {
 
 #zomatoAPI{
     padding-left:25px;
+    text-align: center;
     /*text-align: center;*/
 }
 div#photo.row{
