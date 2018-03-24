@@ -38,41 +38,46 @@
                 <div class="col s12 m1">
                    <img src="heartfoodT.gif" width="80px" height="66">
                 </div>
-                <div class="col s12 m8">
+                <div class="col s12 m7">
                    <a href="#" class="brand-logo white-text">My Veggie Eats</a>
                 </div>
 
-                <div class="col s12 m3">
-                <ul class="right">
+                <div class="col s12 m4">
+
+                    <div class="row">
+                
                     <!-- Login Here msg for user - replace with hello msg once signed in-->
-                    <li id="hiUser">Welcome User Name</li>
-
-                    <li>
-                        <div class="row">
-                            <form class="col s12" id="loginForm">
+                    
+                    
+                    <form id="loginForm">
                                 
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input id="txtEmail" type="name" class="validate">
-                                                <label for="email">Email</label>
-                                            </div>
+                      <div class="row">
+
+                        <div class="input-field col s4">
+                            <input id="txtEmail" type="name" class="validate">
+                            <label for="email">Email</label>
+                         </div>
                                         
                                         
-                                            <div class="input-field col s12">
-                                                <input id="txtPassword" type="name" class="validate">
-                                                <label for="txtPassword">Password</label>
-                                            </div>
-                                        </div>
-                            <button class="btn waves-effect waves-light" id="btnLogin" name="action">Login
-                            <i class="material-icons right">send</i>
+                         <div class="input-field col s4">
+                            <input id="txtPassword" type="name" class="validate">
+                              <label for="txtPassword">Password</label>
+                         </div>
+                       
+                                     
+                        <div class="col s4">
+                            <button class="btn-small waves-effect waves-light light-green" id="btnLogin" name="action">Login
+                            
                             </button>
-                    </li>
+                        </div>
+                    
+                    </div>
 
-
-                    <li>
+                    <div class="row">
+                      <div class="col s6" >
                     <!-- Existing User:Login Modal Trigger -->
-                    <a id="modalBtn" class="modal-trigger white-text" href="#modal1">Forget Passord?</a>
-                    </li>
+                    <a id="modalBtn" class="modal-trigger white-text" href="#modal1">Get Password</a>
+                    </div>
 
                         <!-- Existing User:LOGIN MODAL-->
                         <div id="modal1" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
@@ -98,10 +103,10 @@
 
 
 
-                    <li>
+                    <div class="col s6">
                         <!-- New User:Login Modal Trigger -->
                         <a id="modalBtn2" class="modal-trigger  white-text" href="#modal2">Register</a>
-                        </li>
+                    </div>
     
                         <!-- New User:LOGIN MODAL-->
                         <div id="modal2" class="modal grey lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
@@ -141,9 +146,9 @@
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="btnSignUp">Sign Up!</a>
                             </div>
                         </div>
-                      
+                     
 
-                </ul>
+           
                 </div>
             </div>
        </header> 
@@ -156,15 +161,19 @@
 
             
 
-            <div class="col s9 m5 input-field">
+            <div class="col s6 m5 input-field">
                     <input id="city" type="text">
                     <label for="city" class="white-text right">Enter City to Search</label>
             </div>
             
-            <div class="col s3 m1 searchDiv">
+            <div class="col s3 m4 searchDiv">
                     <span id="signedInAs"></span>
                     <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light  red" value="Search"><i class="material-icons prefix">search</i> </button> 
                 </div>
+
+            <div class="col s6 m2">
+                    <p id="hiUser">Welcome User Name</p>
+            </div>
             <!-- Phase II:  Additional Search Features 
                 
             1. Cuisine Search to add non-veg restaurants
@@ -176,14 +185,14 @@
                     <option value="3">defaut 3</option> -->
 
                 <!--</select> 
-            </div>
+            </div>-->
 
-            2. Restaurant Name - search for user input rest name 
+            <!--2. Restaurant Name - search for user input rest name -->
             <div class="col s12 m3 l3 input-field">
                 <input id="restaurant" type="text">
                 <label for="restaurant"class="white-text">Restaurant Name</label>
             </div>
-        -->
+       
             
             
           </form>
@@ -338,7 +347,7 @@
         
         </div>
 
-        <!--Firebase Test lab -->
+        <!--Firebase Test lab 
         <div class="row">
             <form class="col s12" id="loginForm">
                 <div class="row">
@@ -369,7 +378,7 @@
                     <i class="material-icons right">directions_run</i>
                 </button>
             </form>
-        </div>
+        </div>-->
 
 
         <!-- End of content -->
