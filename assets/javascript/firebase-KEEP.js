@@ -35,15 +35,7 @@ btnLogin.addEventListener('click', e => {
   promise.then(function(){
     uid=auth.currentUser.uid;
     name=auth.currentUser.displayName;
-    console.log(uid,name); //works
     $("#hiUser").text("Hi " + name);
-
-    // var d = firebase.database().ref(uid); //everything
-    // d.on("child_added", function(snapShot) {
-    //     console.log(uid);//current uid
-    //     console.log(snapShot.val());//child nodes of user
-    //     // trial(snapShot.val());
-    // });
 
     //func below gets passed the uid and creates tabs
     console.log("populating tabs from login");
@@ -54,13 +46,9 @@ btnLogin.addEventListener('click', e => {
 //makes the tabs; is called when user registers, logsin, or a tab is added
 function populateTabs(uid){
     $(".tabs").empty();
-    // console.log(uid);
     database.ref(uid).on("value", function(snapShot){
-        // console.log(snapShot);
         var tabInfo=database.ref(uid).key;//uid
         var chillins=snapShot.val();//children of current uid
-        // console.log(tabInfo);
-        // console.log(chillins);
     
         if (uid !== undefined){
             var t1=chillins.tab1;//values of tab1
@@ -102,7 +90,7 @@ btnSignUp.addEventListener('click', e => {
   //Sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass)
   promise.catch(e => console.log(e.message));
-  //if error message above, stop code below!!!!
+  //to do: if error message above, stop code below!!!!
   promise.then(function(){
     var user = firebase.auth().currentUser;
     if (user != null){
@@ -118,14 +106,11 @@ btnSignUp.addEventListener('click', e => {
         user.updateProfile({
             displayName:name
         }).then(function(){
-            // console.log(name, user.displayName);
             $("#hiUser").text("Hi " + name);
         }, function(error){
             console.log("error");
         })
-        // console.log(uid, name, user.displayName); delete
     }; 
-    // console.log(name, user.displayName); delete
   });
   $("#loginForm")[0].reset();
 });
@@ -136,7 +121,6 @@ $("#btnSignOut").on("click", function(event){
         $("#hiUser").empty();
         uid=undefined;
         name=undefined;
-        console.log(uid,name);
         window.location.reload();   
     }).catch(function(error){
         console.log("Error in signing out");
@@ -149,9 +133,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user!=null) {
         uid=user.uid;
         name=user.displayName;
-        // console.log("auth state change: "+uid, name);
-        console.log("populating tabs from auth state change");
-        // populateTabs(uid);
         $("#hiUser").text("Hi " + name);
     } 
     else {console.log('not logged in');}
@@ -190,7 +171,6 @@ $("#addTab").on("click", function(event){
                 });
 
                 popTab=true; //set flag to true so no error msg
-                console.log("populating tabs from add tab");
                 break label;
             }
         }
@@ -212,6 +192,7 @@ $("#addTab").on("click", function(event){
 
  //populates tabs from firebase info
  database.ref(uid).on("value", function(snapShot) {
+    $(".tabs").empty();
     console.log("populating tabs from listener")
     var tabInfo=database.ref(uid).key;//uid
     var chillins=snapShot.child(uid).val();//children of uid
@@ -242,7 +223,3 @@ $("#addTab").on("click", function(event){
         }
     }
 });
-
-//when app opens, assign tab ids from firebase
-//if tab has info, .update instead of push
-//when address pushed, call function to change address to lat and long, then initmap map to that
