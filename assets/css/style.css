@@ -125,8 +125,18 @@ div#notes.row{
 #modalBtnNotes{
     margin-top: -25px;
 }
-#btnLogin, #btnLogOut {
+/*#btnLogin, #btnLogOut {
     margin-top: 16px;
     color: white;
-    font-size:10px;
+    font-size:10px;*/
+}
+/* CV new styles here */
+#topLoginBlock {
+    width: 300px;
+}
+#txtEmail, #txtPassword  { 
+    background-color:#aed581;
+    font-size:1rem;
+    border-bottom: white 1px solid;
+    color: white;   
 }

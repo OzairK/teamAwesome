@@ -54,13 +54,13 @@
                       <div class="row">
 
                         <div class="input-field col s4">
-                            <input id="txtEmail" type="email" class="validate">
-                            <label for="textEmail">Email</label>
+                            <input id="txtEmail" type="name" class="validate">
+                            <label for="email">Email</label>
                          </div>
                                         
                                         
                          <div class="input-field col s4">
-                            <input id="txtPassword" type="password" class="validate">
+                            <input id="txtPassword" type="name" class="validate">
                               <label for="txtPassword">Password</label>
                          </div>
                        
@@ -72,8 +72,6 @@
                         </div>
                     
                     </div>
-
-                    </form>
 
                     <div class="row">
                       <div class="col s6" >
@@ -90,7 +88,7 @@
                                     <div class="row">
                                         <div class="input-field col s6">We'll send you an email to reset that.
                                             <input id="txtEmail" type="email" class="validate">
-                                            <label for="txtEmail">Email</label>
+                                            <label for="email">Email</label>
                                         </div>
                                     </div>
                                    
@@ -120,8 +118,8 @@
                                     <form class="col s12">
                                         <div class="row">
                                             <div class="input-field col s6">
-                                                <input id="txtName" type="text" class="validate">
-                                                <label for="txtName">First Name</label>
+                                                <input id="first_name" type="text" class="validate">
+                                                <label for="first_name">First Name</label>
                                             </div>
                                             <div class="input-field col s6">
                                                 <input id="last_name" type="text" class="validate">
@@ -130,13 +128,13 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <input id="txtPassword" type="password" class="validate">
-                                                <label for="txtPassword">Password</label>
+                                                <input id="password" type="password" class="validate">
+                                                <label for="password">Password</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <input id="txtEmail" type="email" class="validate">
+                                                <input id="email" type="email" class="validate">
                                                 <label for="email">Email</label>
                                             </div>
                                         </div>
@@ -168,7 +166,7 @@
                     <label for="city" class="white-text right">Enter City to Search</label>
             </div>
             
-            <div class="col s6 m4 searchDiv">
+            <div class="col s3 m4 searchDiv">
                     <span id="signedInAs"></span>
                     <button type="submit" id="searchIt" class ="btn-floating btn-small waves-effect waves-light  red" value="Search"><i class="material-icons prefix">search</i> </button> 
                 </div>
@@ -308,14 +306,14 @@
                 </div>
 
                 
-                <!-- User Notes from Firebase -->
-                <div class="row pink" id="notes">
-                    <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
-                </div>
+            <!-- User Notes from Firebase -->
+            <div class="row pink" id="notes">
+                <span id="userNotes">Chosen Restaurant: Firebase User Notes</span>
+            </div>
 
-                 <!-- MODAL to add/edit/delete notes -->
-                <div class="row" id="userNotes">
-                  <div class="col s12">
+            <!-- MODAL to add/edit/delete notes -->
+            <div class="row" id="userNotes">
+                 <div class="col s12">
                     <!-- Add Tab Modal Trigger -->
                     <a id="modalBtnNotes" class ="btn-floating btn-small waves-effect waves-light right red"  href="#modalNotes" value="editNotes"><i class="material-icons prefix">edit</i></a>
                 </div>
@@ -336,8 +334,8 @@
                 <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editNotes">Submit</a>
-                </div>
-             </div>
+                                     </div>
+                                </div>
 
 
 
@@ -349,23 +347,6 @@
         
         </div>
 
-        <div><table>
-            <tr>
-                <th>Restaurant>
-                <th>Veggie Alternative</th>
-                <th>Secret Item</th>
-                <th>Standard Menu</th>
-            <tr>
-                <td>Burger King</td>
-                <td>Veggie burger</td>
-                <td></td>
-                <td>yes</td>
-            </tr>
-
-
-            </tr>
-
-        </table></div>
         <!--Firebase Test lab 
         <div class="row">
             <form class="col s12" id="loginForm">

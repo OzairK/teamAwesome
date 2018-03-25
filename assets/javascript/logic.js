@@ -23,7 +23,10 @@ $(document).ready(function () {
     $("#modalBtnNotes").click(function () {
         $("#modalNotes").modal();
     });
-    
+    //LOGIN MODAL
+    $("#modalLoginBtn").click(function () {
+        $("#modalLogin").modal();
+    });
 });
 
 //var elem = document.querySelector('.fixed-action-btn');
