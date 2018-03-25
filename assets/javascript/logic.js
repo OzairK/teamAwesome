@@ -68,15 +68,12 @@ $("#searchIt").on("click", function (event) {
     generalSearch = true;
     city = capUpper($("#city").val().trim());
     restName = capUpper($("#restaurant").val().trim());
-    // console.log(city);
-    // console.log(restName);
     if (restName === "") {
         gereralSearch = true;
     }
     else {
         generalSearch = false;
     };
-    console.log(generalSearch, restName);
     city = capUpper($("#city").val().trim());
     if (generalSearch) {
         getCityInfo(function () {
@@ -85,7 +82,7 @@ $("#searchIt").on("click", function (event) {
     }
     else {
         getCityInfo(function () {
-            getSpecificRest();
+            // getSpecificRest();
         })
     };
 });
