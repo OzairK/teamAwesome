@@ -177,7 +177,7 @@ $("#addTab").on("click", function (event) {
 
         //if no tabs populated, max is reached, alert user
         if (popTab === false) {
-            alert("You've reached the max number of tabs. Delete one first before adding another.");
+            console.log("You've reached the max number of tabs. Delete one first before adding another.");
         }
     }
 

@@ -305,7 +305,7 @@ function getSpecificRest() {
             });
         }
         else {
-            alert("no restaurant by that name");
+            console.log("no restaurant by that name");
         };
     });
 };
