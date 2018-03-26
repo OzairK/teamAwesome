@@ -84,11 +84,11 @@ function initMap() {
             marker.addListener('click', function () {
                 infoWindow.open(map, marker);
                 if(newMarker.imageURL){
-                $("#restaurant-photo").html(`<img src=${newMarker.imageURL}  class="restaurantImage">`);
+                $("#restaurant-photo").html(`<img src=${newMarker.imageURL}  class="responsive-img">`);
                 }
                 else{
                     var stockImage = "http://img1.cookinglight.timeinc.net/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/2017/07/main/veggie-tofu-stir-fry-ck.jpg?itok=V88FQY4y";
-                    $("#restaurant-photo").html(`<img src=${stockImage} class="restaurantImage">`);  
+                    $("#restaurant-photo").html(`<img src=${stockImage} class="responsive-img">`);  
                 }
                 $("#restaurants-big").html(` <h2>${newMarker.name}</h2> <hr>`);
 

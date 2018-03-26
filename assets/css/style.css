@@ -76,19 +76,17 @@ text-align: center;}
 }
 
 div#photo.row{
-    background-color: #7DB249;
-    max-width: 287px;
+    background-color:#ffab80;
 }
-#restaurant-photo {
-    width: 287px;
-    height: 253px;
-}
-.restaurantImage{
-    max-width: 287px;
+
+.hearthold { background-color: pink; 
+    margin-left: auto;
+    margin-right: auto;
 }
 div#listingDetails.row{
+    padding-top: 15px;
     min-height:150px;
-    background-color: #f7e76e;
+    background-color:#ffab80;
     text-align: center;
 }
 #restaurants-big{
@@ -97,11 +95,10 @@ div#listingDetails.row{
 }
 div#notes.row{
     min-height:150px;
-    background-color: #f7e76e;
+    background-color:#ffab80;
     border-top:1px solid grey;
 }
-#restaurant-info{
-}
+
 #modalBtnTab {
     font-size: 1.5em;
     color: #f2453d;
