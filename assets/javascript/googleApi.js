@@ -10,24 +10,47 @@ function initMap() {
     
     // array of all the restaurants, with coordinates for its markers
     var markers=[];
-    for (var i=0; i<allRestaurants.length; i++){
-        var latInt = parseFloat(allRestaurants[i].location.latitude);
-        var longInt=parseFloat(allRestaurants[i].location.longitude);
-        markers[i] = {
-            coords:{
-               lat: latInt,
-               lng: longInt
-            },
-            name: allRestaurants[i].name,
-            imageURL: allRestaurants[i].image,
-            avgRating: allRestaurants[i].user_rating.avg,
-            address: allRestaurants[i].location.address,
-            priceRange:getDollarSigns(allRestaurants[i].price)
-            
-        }
-    };
 
-    function getDollarSigns(price) {                                    // get the average price (#/5) in $ signs
+    //if not searching a sepcific restaurant, run code
+    if (generalSearch) {
+        for (var i=0; i<allRestaurants.length; i++){
+            var latInt = parseFloat(allRestaurants[i].location.latitude);
+            var longInt=parseFloat(allRestaurants[i].location.longitude);
+            markers[i] = {
+                coords:{
+                lat: latInt,
+                lng: longInt
+                },
+                name: allRestaurants[i].name,
+                imageURL: allRestaurants[i].image,
+                avgRating: allRestaurants[i].user_rating.avg,
+                address: allRestaurants[i].location.address,
+                priceRange:getDollarSigns(allRestaurants[i].price)
+                
+            }
+        };
+    }
+
+    // if specific restaurant is called, run code below
+    if (!generalSearch) {
+        var latInt = parseFloat(specificRest.location.latitude);
+        var longInt=parseFloat(specificRest.location.longitude);
+        markers = {
+            coords:{
+            lat: latInt,
+            lng: longInt
+            },
+            name: specificRest.name,
+            imageURL: specificRest.image,
+            avgRating: specificRest.user_rating.avg,
+            address: specificRest.location.address,
+            priceRange:getDollarSigns(specificRest.price)
+        }
+    }
+
+
+
+    function getDollarSigns(price) {                    // get the average price (#/5) in $ signs
         switch (price) {
 
             case 1:
@@ -51,17 +74,20 @@ function initMap() {
         }
     }
 
-        console.log(markers);
+    //if not searching a specific restaurant, add markers for all restaurants
+    if (generalSearch) {
+        for (var i = 0; i < markers.length; i++) {
+            addRestaurantMarker(markers[i]);
+        }
+    }
 
-
-    for (var i = 0; i < markers.length; i++) {
-        addRestaurantMarker(markers[i]);
-        // console.log(markers[i]);
+    //if search a specific restaurant, only add one marker
+    if (!generalSearch) {
+        addRestaurantMarker(markers);
     }
     
     // Add a new restaurant marker 
     function addRestaurantMarker(newMarker) {
-        // console.log(newMarker);
         var marker = new google.maps.Marker({
             position: newMarker.coords,
             map: map,
@@ -146,7 +172,3 @@ function getLatLng(){
         initMap();
     });
 };
-
-//notes for kris:
-//when user moves map, get new center coordinates and add "search here" button to repopulate different restaurants 
-//add radius to rest. search
