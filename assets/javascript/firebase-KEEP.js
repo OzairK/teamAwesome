@@ -193,10 +193,8 @@ $("#addTab").on("click", function (event) {
 //populates tabs from firebase info
 database.ref(uid).on("value", function (snapShot) {
     $(".tabs").empty();
-    console.log("populating tabs from listener")
     var tabInfo = database.ref(uid).key;//uid
     var chillins = snapShot.child(uid).val();//children of uid
-    // console.log(t1, t2, t3); //keep this
 
     if (uid !== undefined) {
         var t1 = chillins.tab1;//values of tab1
@@ -204,19 +202,19 @@ database.ref(uid).on("value", function (snapShot) {
         var t3 = chillins.tab3;
         var tabInfo = database.ref(uid).key;
         if (typeof t1 !== "boolean") {
-            var newTab = $("<li>").addClass("tab col s3");
+            var newTab = $("<li>").addClass("tab col s2");
             var newA = $("<a id=tab1>").text(t1.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);
         }
         if (typeof t2 !== "boolean") {
-            var newTab = $("<li>").addClass("tab col s3");
+            var newTab = $("<li>").addClass("tab col s2");
             var newA = $("<a id=tab2>").text(t2.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);
         }
         if (typeof t3 !== "boolean") {
-            var newTab = $("<li>").addClass("tab col s3");
+            var newTab = $("<li>").addClass("tab col s2");
             var newA = $("<a id=tab3>").text(t3.tabName);
             newTab.append(newA);
             $(".tabs").append(newTab);

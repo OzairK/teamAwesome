@@ -67,6 +67,8 @@ $("#searchIt").on("click", function (event) {
     event.preventDefault();
     generalSearch = true;
     city = capUpper($("#city").val().trim());
+
+    //if someone enters in a restaurant name, it's not a general search and the order of functions changes
     restName = capUpper($("#restaurant").val().trim());
     if (restName === "") {
         gereralSearch = true;
@@ -75,6 +77,8 @@ $("#searchIt").on("click", function (event) {
         generalSearch = false;
     };
     city = capUpper($("#city").val().trim());
+
+
     if (generalSearch) {
         getCityInfo(function () {
             getCuisineInfo();
@@ -82,7 +86,7 @@ $("#searchIt").on("click", function (event) {
     }
     else {
         getCityInfo(function () {
-            // getSpecificRest();
+            getSpecificRest();
         })
     };
 });
@@ -91,7 +95,6 @@ $(document).on("click", ".cuisineOptionBox", function () {
     event.preventDefault();
     var c = $(this).val();
     cuisine_id = "308%2C%20" + c;
-    console.log(this);
     getRestaurants();
 });
 
@@ -147,7 +150,6 @@ var entity_type;
 //gives location info for use in other queries; also gives suggestd city name from a search word (use this function for search??)
 //gives location information for inputed city, Ex: name, city_id, city_type
 function getCityInfo(callback) {
-    console.log("running getCityInfo; always run");
     queryUrlLocation = "https://developers.zomato.com/api/v2.1/locations?query=" + city;
     $.ajax({
         url: queryUrlLocation,
@@ -160,7 +162,7 @@ function getCityInfo(callback) {
         initMapLat = parseFloat(response.location_suggestions[0].latitude);
         initMapLng = parseFloat(response.location_suggestions[0].longitude);
         entity_type = response.location_suggestions[0].entity_type;
-        getRestaurants();                                                           //oz: this makes sure that restaurants gets updated when new city is searched for
+        getRestaurants();
         callback();
     });
 };
@@ -169,12 +171,10 @@ var queryUrlCuisines;
 var cuisine_id;
 var cuisine_name;
 var allCuisines = []; //list of all cuisines and ids in obj
-// var allCuisines=[]; //list all cuisines in array
+
 //gives list of cuisine types for a city
 function getCuisineInfo() {
-    console.log("running getCuisineInfo; always on general search");
     if (!generalSearch) return;
-    console.log(generalSearch + " running getCuisineInfo"); queryUrlCuisines = "https://developers.zomato.com/api/v2.1/cuisines?city_id=" + city_id;
 
     $.ajax({
         url: queryUrlCuisines,
@@ -198,7 +198,6 @@ function getCuisineInfo() {
             var cuisineOption = $("<li>").addClass("cuisineOptionBox").attr("value", r.cuisine_id).text(r.cuisine_name);
             $(".select-dropdown").append(cuisineOption);
         };
-        console.log(allCuisines);
     });
 };
 
@@ -254,12 +253,8 @@ var specific_rest_id;
 var specificRest;
 //function to get restaurant data from search bar
 function getSpecificRest() {
-    console.log(restName);
-    //if text in search by name bar, run this
-    //get rest id of text entered
     if (generalSearch) return;
-    console.log("running getSpecifRest");
-    querySpecificRest = "https://developers.zomato.com/api/v2.1/search?entity_id=" + city + "&entity_type=" + entity_type + "&q=hobbit%20cafe"; //change search words hobbit, cafe
+    querySpecificRest = "https://developers.zomato.com/api/v2.1/search?entity_id=" + city + "&entity_type=" + entity_type + "&q="+restName; 
     $.ajax({
         url: querySpecificRest,
         method: "GET",
@@ -268,10 +263,9 @@ function getSpecificRest() {
         var r = response.restaurants[0].restaurant;
         var rl = r.location;
         var ru = r.user_rating;
-        console.log(response);
+        // console.log(response);
         if (r.name === restName) {
             specific_rest_id = r.id;
-            console.log(specific_rest_id);
 
             querySpecificRest = "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + specific_rest_id;
             $.ajax({
@@ -298,7 +292,7 @@ function getSpecificRest() {
                         "votes": ru.votes
                     }
                 }
-                console.log(specificRest);
+                initMap();
             });
         }
         else {
