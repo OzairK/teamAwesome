@@ -99,6 +99,19 @@ div#notes.row{
     border-top:1px solid grey;
 }
 
+div#displayNotes.row{
+    min-height:150px;
+    background-color:#ffab80;
+    border-top:1px solid grey;
+}
+
+
+div#notesOz.row{
+    min-height:150px;
+    background-color:#ffab80;
+    border-top:1px solid grey;
+}
+
 #modalBtnTab {
     font-size: 1.5em;
     color: #f2453d;

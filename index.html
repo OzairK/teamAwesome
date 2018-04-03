@@ -17,6 +17,10 @@
     <!-- Materialize: Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!-- Browser Reset -->
     <link rel="stylesheet" href="./assets/css/reset.css">
 
@@ -59,12 +63,14 @@
 
             <form id="headerSearch">
 
+
                 <div class="col s3 searchDiv">
                     <span id="signedInAs"></span>
                     <button type="submit" id="searchIt" class="btn-floating btn-small waves-effect waves-light right red" value="Search">
                         <i class="material-icons prefix">search</i>
                     </button>
                 </div>
+
 
                 <div class="col s12 m3 l3 input-field">
                     <input id="city" type="text">
@@ -175,19 +181,31 @@
                 </div>
 
                 <!-- User Notes from Firebase -->
-                <div class="row" id="notes">
-                    <span id="userNotes"></span>
+
+                <!-- oz -->
+                <div class="row" id="notesOz">
+                    <span id="userNotes"><form>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Notes</label>
+                            <textarea class="form-control" id="thisIsNote" rows="3" ></textarea>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-success" id="notesToBeAdded">Add Note</button>
+                    <button type="button" class="btn btn-success" id="notesToBeDeleted">Clear Notes</button></span>
                 </div>
 
+                <div class="row" id="displayNotes"> </div>
+
                 <!-- MODAL to add/edit/delete notes --><!-- NOTE:  same id as above......-->
-                <div class="row" id="notes">
+                <!-- <div class="row" id="notes">
                     <div class="col s3">
-                        <!--Add Tab Modal Trigger -->
+                       
                         <a id="modalBtnNotes" class="btn-floating btn-small waves-effect waves-light right red" href="#modalNotes" value="editNotes">
                             <i class="material-icons prefix">edit</i>
                         </a>
                     </div>
-                    <!-- Map Tab MODAL-->
+                   
                     <div id="modalNotes" class="modal light-green lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
                         <div class="modal-content">
                             <h4>My Dining Notes: </h4>
@@ -206,7 +224,10 @@
                             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editNotes">Submit</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+
+                
 
                 <!-- We can place additional listings here with less detail here -->
                 <!-- Scrollable listing goes here (cap at some number?) -->
