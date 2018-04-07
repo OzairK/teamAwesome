@@ -95,26 +95,28 @@ div#listingDetails.row{
 }
 div#notes.row{
     min-height:150px;
-    background-color:#ffab80;
+    background-color:#fff;
     border-top:1px solid grey;
 }
 
 div#displayNotes.row{
     min-height:150px;
-    background-color:#ffab80;
+    background-color:#fff;
     border-top:1px solid grey;
 }
 
 
 div#notesOz.row{
     min-height:150px;
-    background-color:#ffab80;
+    background-color:#fff;
     border-top:1px solid grey;
 }
 
 #modalBtnTab {
     font-size: 1.5em;
-    color: #f2453d;
+    color: #00838f;
+    margin-top: 10px;
+    background-color: #00acc1;
 }
 .tabs{
     background-color:#aed581;
@@ -136,4 +138,9 @@ div#notesOz.row{
     font-size:1rem;
     border-bottom: white 1px solid;
     color: white;   
+}
+.btn {
+    padding-right: 8px;
+    padding-left: 8px;
+    background-color:#689f38;
 }

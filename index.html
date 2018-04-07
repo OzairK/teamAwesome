@@ -14,14 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Amita" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela" rel="stylesheet">
 
- <!-- bootstrap -->
- <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-
     <!-- Materialize: Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-
-
-   
 
     <!-- Browser Reset -->
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -40,20 +34,21 @@
     <!-- Top of page container-->
     <div class="container">
 
+        <!-- Header contains title and log in/out button-->
         <header>
             <div class="row light-green darken-1">
                 <div class="col s12 m2">
                     <img src="./assets/images/heartfoodT.gif" width="80px" height="66">
                 </div>
                 <div class="col s12 m7">
-                    <a href="#" class="brand-logo white-text">My Veggie Eats</a>
+                    <a href="#" class="brand-logo white-text">My Veggie Eats</a><!-- Site Title -->
                 </div>
                 <div class="col s12 m3">
                     <ul class="right">
                         <li id="hiUser"></li>
 
                         <li>
-                            <a id="modalLoginBtn" class="waves-effect waves-light btn modal-trigger" href="#modalLogin">Login</a>
+                            <a id="modalLoginBtn" class="waves-effect waves-light btn modal-trigger" href="#modalLogin">Log In/Out</a>
                         </li>
                     </ul>
                 </div>
@@ -65,26 +60,30 @@
 
             <form id="headerSearch">
 
-
                 <div class="col s3 searchDiv">
+                    <!--Post user name here once logged in-->
                     <span id="signedInAs"></span>
+
+                    <!--Search button -->
                     <button type="submit" id="searchIt" class="btn-floating btn-small waves-effect waves-light right red" value="Search">
                         <i class="material-icons prefix">search</i>
                     </button>
                 </div>
 
-
+                <!-- Text box for city search-->
                 <div class="col s12 m3 l3 input-field">
                     <input id="city" type="text">
                     <label for="city" class="white-text">City to Search</label>
                 </div>
 
+                <!-- Drop down list of options for cuisine search-->
                 <div id="cuisineSearch" class="input-field col s12 m3 ">
                     <select id="drop-down">
                         <option class="white-text" value="" selected>Add Cuisine</option>
                     </select>
                 </div>
 
+                <!-- Text box for restaurant-specific search-->
                 <div class="col s12 m3 l3 input-field">
                     <input id="restaurant" type="text">
                     <label for="restaurant" class="white-text">Restaurant Name</label>
@@ -151,20 +150,14 @@
                         </div>
                     </div>
 
-                    <div class="col s9">
-                        <!-- 3 Tabs for customizing -->
-                        <!-- <div class="hearts col s2">
-                            <a class="active" href="test1" id="tab1Name home">
-                                <i class="material-icons prefix">favorite</i>
-                            </a>
-                        </div> -->
-                        
+                    <!-- Custom user map tabs-->
+                    <div class="col s9">    
                         <ul class="tabs">
                         </ul>
                     </div>
                 </div>
 
-                <!-- Map -->
+                <!-- Google Map -->
                 <div class="row">
                     <div id="map"></div>
                 </div>
@@ -197,47 +190,8 @@
                     <button type="button" class="btn btn-success" id="notesToBeDeleted">Clear Notes</button></span>
                 </div>
 
-                <div class="row" id="displayNotes"> </div>
-
-                <!-- MODAL to add/edit/delete notes --><!-- NOTE:  same id as above......-->
-                <!-- <div class="row" id="notes">
-                    <div class="col s3">
-                       
-                        <a id="modalBtnNotes" class="btn-floating btn-small waves-effect waves-light right red" href="#modalNotes" value="editNotes">
-                            <i class="material-icons prefix">edit</i>
-                        </a>
-                    </div>
-                   
-                    <div id="modalNotes" class="modal light-green lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
-                        <div class="modal-content">
-                            <h4>My Dining Notes: </h4>
-                            <div class="row">
-                                <form id="notePad" class="col s12">
-
-                                    <div class="input-field col s12">
-                                        <textarea id="fbnotes" class="materialize-textarea">skdfsdfsdf  existing fb notes go here- dynamically fill</textarea>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editNotes">Submit</a>
-                        </div>
-                    </div>
-                </div> -->
-
-
                 
-
-                <!-- We can place additional listings here with less detail here -->
-                <!-- Scrollable listing goes here (cap at some number?) -->
-                <div class="row" id="listings">
-                    <div class="col">
-                        <span id="restaurants-list"></span>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -245,7 +199,7 @@
 
     <div id="modalLogin" class="modal light-green lighten-2" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 4%;">
         <div class="modal-content">
-            <h4>Log In </h4>
+            <h4>Log In/Out </h4>
             <div class="row">
 
                 <form id="loginForm">
