@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
+ 
 <head>
     <title>My Veggie Eats</title>
     <meta charset="UTF-8">
@@ -36,7 +36,7 @@
 <body>
 
     <!-- Top of page container-->
-    <div class="container">
+    <div class="container z-depth-3">
 
         <header>
             <div class="row light-green darken-1">
@@ -59,7 +59,7 @@
         </header>
 
         <!-- Search boxes -->
-        <div class="row light-green darken-1">
+        <div class="row light-green darken-1 green-box">
 
             <form id="headerSearch">
 
@@ -90,19 +90,19 @@
 
             </form>
         </div>
-    </div>
+    <!-- </div> -->
     <!-- End of top container-->
 
     <!-- Content container-->
-    <div class="container">
+    <!-- <div class="container"> -->
         <div class="row">
 
             <!-- Left column:  Google Map/tabs -->
             <div id="googleAPI" class="col s12 m8">
 
                 <!-- Map Tabs -->
-                <div class="row light-green lighten-2">
-                    <div class="col s3">
+                <div class="row light-green lighten-2 valign-wrapper">
+                    <div class="col">
                         <!-- Add Tab Modal Trigger -->
                         <a id="modalBtnTab" class="waves-effect waves-light btn modal-trigger" href="#modalTabs">+ Tab</a>
                     </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="col s9">
+                    <div class="col">
                         <!-- 3 Tabs for customizing -->
                         <!-- <div class="hearts col s2">
                             <a class="active" href="test1" id="tab1Name home">
@@ -157,7 +157,7 @@
                             </a>
                         </div> -->
                         
-                        <ul class="tabs">
+                        <ul class="row tabs">
                         </ul>
                     </div>
                 </div>
@@ -183,12 +183,11 @@
                 <!-- User Notes from Firebase -->
 
                 <!-- oz -->
-                <div class="row" id="notesOz">
+                <div class="row " id="notesOz">
                     <span id="userNotes"><form>
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Notes</label>
-                            <textarea class="form-control" id="thisIsNote" rows="3" ></textarea>
+                            <textarea placeholder="Add notes here..." class="form-control" id="thisIsNote" rows="3" ></textarea>
                         </div>
                     </form>
                     <button type="button" class="btn btn-success" id="notesToBeAdded">Add Note</button>
